@@ -1,0 +1,5 @@
+node_modules/
+server/dist
+src/**/*.js
+src/**/*.js.map
+dist/**/*
