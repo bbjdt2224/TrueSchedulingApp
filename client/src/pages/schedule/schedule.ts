@@ -1,11 +1,15 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 import { ClassesProvider } from '../../providers/classes/classes';
+import { GroupsProvider } from '../../providers/groups/groups';
 import { classes } from '../../classes/classes';
+import { GroupRelation } from '../../classes/grouprelation';
 import { AlertController } from 'ionic-angular';
 import { NewClassPage } from '../new-class/new-class';
 import { MenuController } from 'ionic-angular';
 import { ClassModalPage } from '../class-modal/class-modal';
+import { NewGroupPage } from '../new-group/new-group';
+import { GroupHomePage } from '../group-home/group-home';
 
 
 /**
@@ -33,6 +37,7 @@ export class SchedulePage {
     visualClass: string[];
     currentDay = this.days[this.currDate.getDay()];
     colorClasses = ['class1','class2','class3','class4','class5']
+    groupRelations: GroupRelation[];
 
     constructor(
         public navCtrl: NavController, 
@@ -40,7 +45,8 @@ export class SchedulePage {
         private classesProvider: ClassesProvider,
         public alertCtrl: AlertController,
         public menuCtrl: MenuController,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        private groupsProvider: GroupsProvider
     ) {
     }
 
@@ -48,10 +54,17 @@ export class SchedulePage {
         console.log('ionViewDidLoad SchedulePage');
         this.currSemester = this.navParams.get('semester');
         this.getClasses();
+        this.menuInit();
+        this.getGroups();
     }
 
     ionViewDidEnter() {
         this.getClasses();
+        this.menuCtrl.close();
+    }
+
+    getGroups(){
+        this.groupsProvider.getGroups().subscribe(relations => {this.groupRelations = relations; console.log(relations)});
     }
 
 
@@ -167,5 +180,78 @@ export class SchedulePage {
             }
         }
     }
+
+    menuInit(){
+        this.menuCtrl.enable(true, 'main');
+        this.menuCtrl.enable(false, 'semester');
+        this.menuCtrl.enable(false, 'groups');
+    }
+
+    mainMenu(){
+        this.menuCtrl.enable(true, 'main');
+        this.menuCtrl.enable(false, 'semester');
+        this.menuCtrl.enable(false, 'groups');
+        this.menuCtrl.open();
+    }
+
+    semester(){
+        this.menuCtrl.enable(false, 'main');
+        this.menuCtrl.enable(true, 'semester');
+        this.menuCtrl.enable(false, 'groups');
+        this.menuCtrl.open();
+    }
+
+    groups(){
+        this.menuCtrl.enable(false, 'main');
+        this.menuCtrl.enable(false, 'semester');
+        this.menuCtrl.enable(true, 'groups');
+        this.menuCtrl.open();
+    }
+
+    newGroup(){
+        this.navCtrl.push(NewGroupPage);
+    }
+
+    joinGroup() {
+        let prompt = this.alertCtrl.create({
+          title: 'Join Group',
+          message: "Enter Group Number",
+          inputs: [
+            {
+              name: 'code',
+              placeholder: 'Code',
+              type: 'number'
+            },
+          ],
+          buttons: [
+            {
+              text: 'Cancel',
+              handler: data => {
+                
+              }
+            },
+            {
+              text: 'Join',
+              handler: data => {
+                this.groupsProvider.joinGroup(data.code).subscribe(result => {
+                    if(result.message == 'fail'){
+                        this.alertCtrl.create({
+                            title: 'Wrong Code',
+                            message: 'You entered an invalid code',
+                            buttons: ['OK']
+                        }).present();
+                    }
+                    this.menuCtrl.close();
+                })
+              }
+            }
+          ]
+        });
+        prompt.present();
+      }
+
+      groupHome(group: GroupRelation){
+          this.navCtrl.setRoot(GroupHomePage, {group: group})
+      }
 
 }

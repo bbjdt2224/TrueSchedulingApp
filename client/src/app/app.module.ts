@@ -12,8 +12,12 @@ import { SchedulePage } from '../pages/schedule/schedule';
 import { NewClassPage } from '../pages/new-class/new-class';
 import { ClassModalPage } from '../pages/class-modal/class-modal';
 import { EditClassPage } from '../pages/edit-class/edit-class';
+import { NewGroupPage } from '../pages/new-group/new-group';
+import { GroupHomePage } from '../pages/group-home/group-home';
 import { UserProvider } from '../providers/user/user';
 import { ClassesProvider } from '../providers/classes/classes';
+import { GroupsProvider } from '../providers/groups/groups';
+import { Calendar } from '@ionic-native/calendar';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { ClassesProvider } from '../providers/classes/classes';
     SchedulePage,
     NewClassPage,
     ClassModalPage,
-    EditClassPage
+    EditClassPage,
+    NewGroupPage,
+    GroupHomePage
   ],
   imports: [
     BrowserModule,
@@ -38,14 +44,18 @@ import { ClassesProvider } from '../providers/classes/classes';
     SchedulePage,
     NewClassPage,
     ClassModalPage,
-    EditClassPage
+    EditClassPage,
+    NewGroupPage,
+    GroupHomePage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
-    ClassesProvider
+    ClassesProvider,
+    GroupsProvider,
+    Calendar
   ]
 })
 export class AppModule {}

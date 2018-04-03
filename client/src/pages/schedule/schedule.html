@@ -4,14 +4,51 @@
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
-    <ion-menu [content]="menu">
+    <ion-menu id="main" [content]="menu">
         <ion-content>
             <ion-list>
-                <ion-item >Groups</ion-item>
+                <ion-item (click)="groups()">
+                    <ion-row>
+                        <ion-col col-10>
+                            Groups
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+                <ion-item (click)="semester()">
+                    <ion-row>
+                        <ion-col col-10>
+                            Semester
+                        </ion-col>
+                        <ion-col col-2>
+                            <ion-icon name="arrow-forward"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-menu id="semester" [content]="menu">
+        <ion-content>
+            <ion-list>
+                <ion-item (click)="mainMenu()"><ion-icon name="arrow-back"></ion-icon></ion-item>
                 <ion-item (click)="changeSemester('Spring')">Spring</ion-item>
                 <ion-item (click)="changeSemester('Summer I')">Summer I</ion-item>
                 <ion-item (click)="changeSemester('Summer II')">Summer II</ion-item>
                 <ion-item (click)="changeSemester('Fall')">Fall</ion-item>
+            </ion-list>
+        </ion-content>
+    </ion-menu>
+    <ion-menu id="groups" [content]="menu">
+        <ion-content>
+            <ion-list>
+                <ion-item (click)="mainMenu()"><ion-icon name="arrow-back"></ion-icon></ion-item>
+                <ion-item (click)="newGroup()">New Group</ion-item>
+                <ion-item (click)="joinGroup()">Join Group</ion-item>
+                <ion-item-divider color="light">My Groups</ion-item-divider>
+                <ion-item *ngFor="let g of groupRelations" (click)="groupHome(g)">{{g.group.groupName}}</ion-item>
             </ion-list>
         </ion-content>
     </ion-menu>

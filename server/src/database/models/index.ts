@@ -28,7 +28,9 @@ const config = configfile[env];
 
 const db:any = {
   users: sequelize.import('./users'),
-  classes: sequelize.import('./classes')
+  classes: sequelize.import('./classes'),
+  groups: sequelize.import('./groups'),
+  groupRelation : sequelize.import('./grouprelation')
 };
 
 Object.keys(db).forEach(modelName => {

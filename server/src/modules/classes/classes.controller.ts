@@ -4,10 +4,10 @@ import * as Sequelize from 'sequelize';
  class ClassesController {
 
     getAllClasses(req, res) {
-        //if(req.session.passport.user) {
+        if(req.session.passport.user) {
             db.classes.findAll({
                 where: {
-                    user: 1,//req.session.passport.user.id,
+                    user: req.session.passport.user.id,
                     semester: req.params.semester,
                     year: req.params.year
                 }
@@ -19,7 +19,7 @@ import * as Sequelize from 'sequelize';
                     res.send(error);
                 }
             );
-        //}
+        }
     }
 
     newClass(req, res) {
