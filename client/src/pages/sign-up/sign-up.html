@@ -16,17 +16,17 @@
 <ion-content padding>
     <ion-list>
         <ion-item>
-            <ion-input type="text" placeholder="Name"></ion-input>
+            <ion-input type="text" placeholder="Name" [(ngModel)]="name"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type="Email" placeholder="Email"></ion-input>
+            <ion-input type="Email" placeholder="Email" [(ngModel)]="email"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type="password" placeholder="Password"></ion-input>
+            <ion-input type="password" placeholder="Password" [(ngModel)]="password"></ion-input>
         </ion-item>
         <ion-item>
-            <ion-input type="password" placeholder="Confirm Password"></ion-input>
+            <ion-input type="password" placeholder="Confirm Password" [(ngModel)]="cpassword"></ion-input>
         </ion-item>
     </ion-list>
-    <button ion-button>Sign-Up</button>
+    <button ion-button (click)="signUp()">Sign-Up</button>
 </ion-content>

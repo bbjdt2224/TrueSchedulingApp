@@ -7,26 +7,14 @@
     <ion-menu id="main" [content]="menu">
         <ion-content>
             <ion-list>
-                <ion-item (click)="groups()">
-                    <ion-row>
-                        <ion-col col-10>
-                            Groups
-                        </ion-col>
-                        <ion-col col-2>
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </ion-col>
-                    </ion-row>
-                </ion-item>
-                <ion-item (click)="semester()">
-                    <ion-row>
-                        <ion-col col-10>
-                            Semester
-                        </ion-col>
-                        <ion-col col-2>
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </ion-col>
-                    </ion-row>
-                </ion-item>
+                <button ion-item (click)="groups()">
+                    <ion-icon name="people" item-start color="default"></ion-icon>
+                    <ion-label>Groups</ion-label>
+                </button>
+                <button ion-item (click)="semester()">
+                    <ion-icon name="book" item-start color="default"></ion-icon>
+                    <ion-label>Semester</ion-label>
+                </button>
             </ion-list>
         </ion-content>
     </ion-menu>

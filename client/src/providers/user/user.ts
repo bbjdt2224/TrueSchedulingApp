@@ -26,4 +26,12 @@ export class UserProvider {
     }, httpOptions);
   }
 
+  signup(email: string, password: string, name: string): Observable<string>{
+    return this.http.post<string>('/api/signup', {
+      email: email,
+      password: password,
+      name: name
+    }, httpOptions);
+  }
+
 }

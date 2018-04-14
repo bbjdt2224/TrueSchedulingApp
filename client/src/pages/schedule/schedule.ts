@@ -60,7 +60,9 @@ export class SchedulePage {
 
     ionViewDidEnter() {
         this.getClasses();
+        this.menuInit();
         this.menuCtrl.close();
+        this.getGroups();
     }
 
     getGroups(){

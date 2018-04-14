@@ -14,10 +14,11 @@ import { ClassModalPage } from '../pages/class-modal/class-modal';
 import { EditClassPage } from '../pages/edit-class/edit-class';
 import { NewGroupPage } from '../pages/new-group/new-group';
 import { GroupHomePage } from '../pages/group-home/group-home';
+import { NewEventPage } from '../pages/new-event/new-event';
 import { UserProvider } from '../providers/user/user';
 import { ClassesProvider } from '../providers/classes/classes';
 import { GroupsProvider } from '../providers/groups/groups';
-import { Calendar } from '@ionic-native/calendar';
+import { EventsProvider } from '../providers/events/events';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { Calendar } from '@ionic-native/calendar';
     ClassModalPage,
     EditClassPage,
     NewGroupPage,
-    GroupHomePage
+    GroupHomePage,
+    NewEventPage
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,8 @@ import { Calendar } from '@ionic-native/calendar';
     ClassModalPage,
     EditClassPage,
     NewGroupPage,
-    GroupHomePage
+    GroupHomePage,
+    NewEventPage
   ],
   providers: [
     StatusBar,
@@ -55,7 +58,7 @@ import { Calendar } from '@ionic-native/calendar';
     UserProvider,
     ClassesProvider,
     GroupsProvider,
-    Calendar
+    EventsProvider
   ]
 })
 export class AppModule {}

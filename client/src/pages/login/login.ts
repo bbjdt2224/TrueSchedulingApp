@@ -35,8 +35,6 @@ export class LoginPage {
     }
 
     login(){
-        let semester = this.findSemester();
-        this.navCtrl.setRoot(SchedulePage, {semester: semester});
         this.userProvider.login(this.email, this.password).subscribe(user => {
             if(user){
                 let semester = this.findSemester();
