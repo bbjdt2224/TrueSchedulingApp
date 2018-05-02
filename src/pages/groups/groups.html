@@ -1,0 +1,33 @@
+<!--
+  Generated template for the GroupsPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>Groups</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item (click)="newGroup()">
+            <ion-icon name="add"></ion-icon>
+            New Group
+        </ion-item>
+        <ion-item (click)="joinGroup()">
+            <ion-icon name="people"></ion-icon>
+            Join Group
+        </ion-item>
+        <ion-item-divider color="light">
+            My Groups
+        </ion-item-divider>
+        <ion-item *ngFor="let g of groupRelations" (click)="groupHome(g)">
+            {{g.group.groupName}}
+        </ion-item>
+    </ion-list>
+</ion-content>

@@ -1,0 +1,185 @@
+page-group-home {
+    [col-1] {
+        -webkit-box-flex: 0;
+        -webkit-flex: 0 0 8.33333%;
+        -ms-flex: 0 0 8.33333%;
+        flex: 0 0 14.285714285714286%;
+        width: 14.285714285714286%;
+        max-width: 14.285714285714286%;
+      }
+      .col {
+        text-align: center;
+        padding: 5px;
+      }
+      .last-month, .next-month {
+        color: #999999;
+        font-size: 90%;
+      }
+      .currentDate, .otherDate {
+        padding: 5px;
+      }
+      .currentDate {
+        font-weight: bold;
+        background-color: red;
+        color: white;
+        border-radius: 1em;
+      }
+      .header {
+        background-color: #1a732d;
+        color: #FFFFFF;
+      }
+      .event-bullet {
+        margin: 2px auto;
+        height: 5px;
+        width: 5px;
+        background-color: green;
+        border-radius: 30px;
+      }
+      .selected-date {
+        width: 20px;
+        height: 2px;
+        background-color: blue;
+      }
+      .unselected-date {
+        border: none;
+      }
+      .body {
+        .grid {
+          padding: 0;
+        }
+        .col:last-child {
+          border-right: none;
+        }
+        .days, .date {
+          text-align: center;
+          margin: 0;
+        }
+        .days {
+          font-weight: bold;
+          border-bottom: solid 1px #1a732d;
+          background-color: #26ab56;
+        }
+        .date {
+          border-top: solid 1px #1a732d;
+          border-bottom: solid 1px #1a732d;
+        }
+
+      .event{
+          background-color: #999999;
+      }
+
+      ion-content {
+        background: url(../assets/imgs/chat-back.png) no-repeat center center fixed;
+        background-size: cover;
+        height: 100%;
+        overflow: hidden;
+        .item-md, .item-ios {
+          background: none;
+        }
+      }
+      ion-footer {
+        background: white;
+        ion-icon {
+          padding: 10px;
+          font-size: 20px;
+          color: green;
+        }
+      }
+      .chat-status {
+        min-height: 49px;
+        .chat-date {
+          display: block;
+          font-size: 10px;
+          font-style: italic;
+          color: #fff;
+          text-shadow: 0px -1px 0px #222, 0px 1px 0px #aaa;
+          height: 15px;
+          left: 10%;
+          right:10%;
+        }
+        .chat-content-center {
+          padding: 5px 10px;
+          background-color: #e1e1f7;
+          border-radius: 6px;
+          font-size: 12px;
+          color: #555;
+          height: 34px;
+          left: 10%;
+          right:10%;
+        }
+      }
+      .chat-message {
+        width: 80%;
+        min-height: 40px;
+        .right-bubble {
+            position: relative;
+            background: #dcf8c6;
+            border-top-left-radius: .4em;
+          border-bottom-left-radius: .4em;
+          border-bottom-right-radius: .4em;
+          padding: 5px 10px 10px;
+          left: 15%;
+          span.msg-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: green;
+          }
+          span.msg-date {
+            font-size: 10px;
+          }
+        }
+    
+        .right-bubble:after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            border: 27px solid transparent;
+            border-left-color: #dcf8c6;
+            border-right: 0;
+            border-top: 0;
+            margin-top: -13.5px;
+            margin-right: -27px;
+        }
+        .left-bubble {
+            position: relative;
+            background: #ffffff;
+          border-top-right-radius: .4em;
+          border-bottom-left-radius: .4em;
+          border-bottom-right-radius: .4em;
+          padding: 5px 10px 10px;
+          left: 5%;
+          span.msg-name {
+            font-size: 12px;
+            font-weight: bold;
+            color: blue;
+          }
+          span.msg-date {
+            font-size: 10px;
+          }
+        }
+    
+        .left-bubble:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            height: 0;
+            border: 27px solid transparent;
+            border-right-color: #ffffff;
+            border-left: 0;
+            border-top: 0;
+            margin-top: -13.5px;
+            margin-left: -27px;
+        }
+      }
+}
+ion-title{
+    text-align: center;
+}
+ion-slide.swiper-slide {
+    align-items: flex-start;
+}
