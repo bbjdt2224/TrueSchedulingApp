@@ -17,7 +17,7 @@
     <ion-list>
         <ion-item>
             <ion-label>Semester</ion-label>
-            <ion-select [(ngModel)]="c.class.semester">
+            <ion-select [(ngModel)]="semester">
                 <ion-option value="Spring">Spring</ion-option>
                 <ion-option value="Summer I">Summer I</ion-option>
                 <ion-option value="Summer II">Summer II</ion-option>
@@ -26,7 +26,7 @@
         </ion-item>
         <ion-item>
             <ion-label>Year</ion-label>
-            <ion-datetime displayFormat="YYYY" min="2016" max="2030" [(ngModel)]="c.class.year"></ion-datetime>
+            <ion-datetime displayFormat="YYYY" min="2016" max="2030" [(ngModel)]="year"></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label>CRN</ion-label>

@@ -7,12 +7,12 @@ import * as firebase from 'firebase';
 import { LoginPage } from '../pages/login/login'
 
  const config = {
-  apiKey: "AIzaSyDZWp0LGYUcjX5nogkWPGwrCCyxpBJZJXw",
-  authDomain: "truescheduling-847d8.firebaseapp.com",
-  databaseURL: "https://truescheduling-847d8.firebaseio.com",
-  projectId: "truescheduling-847d8",
-  storageBucket: "truescheduling-847d8.appspot.com",
-  messagingSenderId: "536371574906"
+  apiKey: 'AIzaSyDZWp0LGYUcjX5nogkWPGwrCCyxpBJZJXw',
+  authDomain: 'truescheduling-847d8.firebaseapp.com',
+  databaseURL: 'https://truescheduling-847d8.firebaseio.com',
+  projectId: 'truescheduling-847d8',
+  storageBucket: 'truescheduling-847d8.appspot.com',
+  messagingSenderId: '536371574906'
  }
 
 @Component({

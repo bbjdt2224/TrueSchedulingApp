@@ -8,10 +8,11 @@ import { ViewChild } from '@angular/core';
 import { NewEventPage } from '../new-event/new-event';
 import { EventsProvider } from '../../providers/events/events';
 import { UserProvider } from '../../providers/user/user';
+import { ChatProvider } from '../../providers/chat/chat';
 import { Events } from '../../classes/events';
 import { ModalController } from 'ionic-angular';
 import { parseDate } from 'ionic-angular/util/datetime-util';
-import * as firebase from 'Firebase';
+import * as firebase from 'firebase';
 
 /**
  * Generated class for the GroupHomePage page.
@@ -39,9 +40,9 @@ export class GroupHomePage {
     viewEvents: Events[][] = new Array();
 
     chats = [];
-    name:string;
+    name = '';
     offStatus:boolean = false;
-    message: string;
+    message = "";
 
     //calendar
     date = new Date();
@@ -59,24 +60,14 @@ export class GroupHomePage {
         private menuCtrl: MenuController,
         private eventsProvider: EventsProvider,
         private modalCtrl: ModalController,
-        private userProvider: UserProvider
+        private userProvider: UserProvider,
+        private chatProvider: ChatProvider
     ) {
         this.groupRelation.group = new Group();
 
         this.message = '';
-        this.userProvider.getUser().subscribe(user => {
-            this.name = user.name;
-        });
+        //this.name = this.userProvider.getUser();
 
-        firebase.database().ref('chatrooms/'+this.groupRelation.group.groupName+'/chats').on('value', resp => {
-            this.chats = [];
-            this.chats = snapshotToArray(resp);
-            setTimeout(() => {
-              if(this.offStatus === false) {
-                this.content.scrollToBottom(300);
-              }
-            }, 1000);
-          });
     }
 
     ionViewDidLoad() {
@@ -85,6 +76,7 @@ export class GroupHomePage {
         this.getEvents();
         this.menuCtrl.enable(true, 'semeser');
         this.menuCtrl.enable(false, 'groups');
+        this.getChats();
     }
 
     eventList(days){
@@ -103,13 +95,20 @@ export class GroupHomePage {
         this.viewEvents = viewEvents;
     }
 
+    getChats(){
+        firebase.database().ref('groups/'+this.groupRelation.group.groupCode+'/chats').on('value', resp => {
+            this.chats = [];
+            this.chats = snapshotToArray(resp);
+            setTimeout(() => {
+              if(this.offStatus === false) {
+                this.content.scrollToBottom(300);
+              }
+            }, 1000);
+          });
+    }
+
     sendMessage() {
-        let newData = firebase.database().ref('chatrooms/'+this.groupRelation.group.groupName+'/chats').push();
-        newData.set({
-          user:this.name,
-          message:this.message,
-          sendDate:Date()
-        });
+        this.chatProvider.sendMessage(this.message, this.name, this.groupRelation.group.groupCode);
         this.message = '';
       }
       
@@ -267,7 +266,6 @@ export class GroupHomePage {
 
 export const snapshotToArray = snapshot => {
     let returnArr = [];
-
     snapshot.forEach(childSnapshot => {
         let item = childSnapshot.val();
         item.key = childSnapshot.key;

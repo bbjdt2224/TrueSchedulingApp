@@ -19,6 +19,7 @@ import { UserProvider } from '../providers/user/user';
 import { ClassesProvider } from '../providers/classes/classes';
 import { GroupsProvider } from '../providers/groups/groups';
 import { EventsProvider } from '../providers/events/events';
+import { ChatProvider } from '../providers/chat/chat';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import { EventsProvider } from '../providers/events/events';
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule,
+    HttpClientModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -58,7 +59,8 @@ import { EventsProvider } from '../providers/events/events';
     UserProvider,
     ClassesProvider,
     GroupsProvider,
-    EventsProvider
+    EventsProvider,
+    ChatProvider
   ]
 })
 export class AppModule {}

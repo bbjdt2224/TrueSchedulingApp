@@ -8,6 +8,7 @@ import { MenuController } from 'ionic-angular';
 import { ClassModalPage } from '../class-modal/class-modal';
 import { parseDate } from 'ionic-angular/util/datetime-util';
 import { GroupsPage } from '../groups/groups';
+import { UserProvider } from '../../providers/user/user';
 
 
 /**
@@ -38,7 +39,8 @@ export class SchedulePage {
         public navParams: NavParams,
         private classesProvider: ClassesProvider,
         public menuCtrl: MenuController,
-        public modalCtrl: ModalController
+        public modalCtrl: ModalController,
+        private userProvider: UserProvider
     ) {
     }
 
@@ -46,6 +48,7 @@ export class SchedulePage {
         console.log('ionViewDidLoad SchedulePage');
         this.currSemester = this.navParams.get('semester');
         this.getClasses();
+        console.log(this.userProvider.getUser());
     }
 
     ionViewDidEnter() {

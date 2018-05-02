@@ -12,33 +12,34 @@ import { SchedulePage } from '../schedule/schedule';
 
 @IonicPage()
 @Component({
-  selector: 'page-sign-up',
-  templateUrl: 'sign-up.html',
+    selector: 'page-sign-up',
+    templateUrl: 'sign-up.html',
 })
 export class SignUpPage {
 
-  email = '';
-  password = '';
-  name = '';
-  cpassword = '';
+    email = '';
+    password = '';
+    name = '';
+    cpassword = '';
 
-  constructor(
-    public navCtrl: NavController, 
-    public navParams: NavParams,
-    private userProvider: UserProvider
-  ) {
-  }
-
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad SignUpPage');
-  }
-
-  signUp(){
-    if(this.password === this.cpassword){
-      this.userProvider.signup(this.email, this.password, this.name).subscribe(user => {
-        this.navCtrl.setRoot(SchedulePage);
-      })
+    constructor(
+        public navCtrl: NavController,
+        public navParams: NavParams,
+        private userProvider: UserProvider
+    ) {
     }
-  }
+
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad SignUpPage');
+    }
+
+    signUp() {
+        if (this.password === this.cpassword) {
+            this.userProvider.signup(this.email, this.password).then( success => {
+                this.userProvider.addUser(this.name, success.uid);
+                this.navCtrl.setRoot(SchedulePage);
+            });
+        }
+    }
 
 }

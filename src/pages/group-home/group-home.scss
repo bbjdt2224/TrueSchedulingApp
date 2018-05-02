@@ -63,13 +63,13 @@ page-group-home {
           border-top: solid 1px #1a732d;
           border-bottom: solid 1px #1a732d;
         }
+      }
 
       .event{
           background-color: #999999;
       }
 
       ion-content {
-        background: url(../assets/imgs/chat-back.png) no-repeat center center fixed;
         background-size: cover;
         height: 100%;
         overflow: hidden;

@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { User } from '../../classes/user';
+import * as firebase from 'firebase/app';
 
 /*
   Generated class for the UserProvider provider.
@@ -10,36 +11,40 @@ import { User } from '../../classes/user';
   and Angular DI.
 */
 
-let currUser;
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
 @Injectable()
 export class UserProvider {
 
-  constructor(private http: HttpClient) { }
+    uid = '';
 
-  getUser(): Observable<User>{
-    return currUser;
-  }
+    constructor(private http: HttpClient) { }
 
-  login(email: string, password: string): Observable<User> {
-    currUser =  this.http.post<User>('/api/login',{
-      email: email,
-      password: password
-    }, httpOptions);
+    setUser(uid) {
+        this.uid = uid
+    }
 
-    return currUser;
-  }
+    getUser() {
+        return this.uid;
+    }
 
-  signup(email: string, password: string, name: string): Observable<string>{
-    return this.http.post<string>('/api/signup', {
-      email: email,
-      password: password,
-      name: name
-    }, httpOptions);
-  }
+    login(email: string, password: string) {
+        return firebase.auth().signInWithEmailAndPassword(email, password);
+    }
+
+    signup(email: string, password: string) {
+        return firebase.auth().createUserWithEmailAndPassword(email, password)
+
+    }
+
+    addUser(name, uid) {
+        let newUser = firebase.database().ref('users/'+uid);
+        newUser.set({
+            name: name
+        });
+    }
 
 }

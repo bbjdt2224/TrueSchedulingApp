@@ -35,15 +35,10 @@ export class LoginPage {
     }
 
     login(){
-        this.userProvider.login(this.email, this.password).subscribe(user => {
-            if(user){
-                let semester = this.findSemester();
-                this.navCtrl.setRoot(SchedulePage, {semester: semester});
-            }
-            else{
-                this.errormsg = 'The email or password is incorrect';
-            }
-        });
+        this.userProvider.login(this.email, this.password).then(
+            success => {this.userProvider.setUser(success.uid); this.navCtrl.setRoot(SchedulePage)},
+            error => this.errormsg = error
+        );
         
     }
 
