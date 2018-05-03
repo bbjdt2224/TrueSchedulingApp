@@ -6,13 +6,32 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>EditEvent</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">Back</button>
+        </ion-buttons>
+        <ion-title>Edit Event</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label>Title</ion-label>
+            <ion-input [(ngModel)]="event.title"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Location</ion-label>
+            <ion-input [(ngModel)]="event.location"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>Description</ion-label>
+            <ion-textarea [(ngModel)]="event.description"></ion-textarea>
+        </ion-item>
 
+        <button ion-button (click)="editEvent()">Done</button>
+        <h2>{{error}}</h2>
+    </ion-list>
 </ion-content>

@@ -12,6 +12,7 @@ import { ChatProvider } from '../../providers/chat/chat';
 import { Events } from '../../classes/events';
 import { ModalController } from 'ionic-angular';
 import { parseDate } from 'ionic-angular/util/datetime-util';
+import { EditEventPage } from '../edit-event/edit-event';
 import * as firebase from 'firebase';
 
 /**
@@ -174,9 +175,8 @@ export class GroupHomePage {
                     {
                       text: 'Edit',
                       handler: () => {
-                        // make edit event page ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        // let editEvent = this.modalCtrl.create(NewEventPage, {event: event, crn: this.crn, semester: this.semester});
-                        // editEvent.present();
+                        let editEvent = this.modalCtrl.create(EditEventPage, {event: event, crn: this.crn, semester: this.semester});
+                        editEvent.present();
                       }
                     },
                     {
