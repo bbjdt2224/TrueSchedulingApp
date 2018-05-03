@@ -11,17 +11,33 @@ import * as firebase from 'firebase';
 @Injectable()
 export class ChatProvider {
 
-  constructor(public http: HttpClient) {
-    console.log('Hello ChatProvider Provider');
-  }
+    constructor(public http: HttpClient) {
+        console.log('Hello ChatProvider Provider');
+    }
 
-  sendMessage(message: string, user, group){
-    let newData = firebase.database().ref('groups/'+group+'/chats').push();
+    sendMessage(message: string, uid, user, crn, semester) {
+        let newData = firebase.database().ref('classes/' + semester + '/' + crn + '/messages').push();
         newData.set({
-          user:user,
-          message:message,
-          sendDate:Date()
+            uid: uid,
+            user: user,
+            message: message,
+            sendDate: Date()
         });
-  }
+    }
+
+    addEvent(semester, crn, title, date: Date, location, description, uid){
+        firebase.database().ref('classes/'+semester+'/'+crn+'/events').push().set({
+            title: title,
+            location: location,
+            description: description,
+            datetime: date.toString(),
+            creator: uid,
+            createdAt: Date()
+        });
+    }
+
+    getEvents(semester, crn){
+        return firebase.database().ref('classes/'+semester+'/'+crn+'/events');
+    }
 
 }

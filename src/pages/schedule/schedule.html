@@ -51,7 +51,7 @@
             </ion-col>
             <ion-col col-2 *ngFor="let day of schedule; let j = index" class="col {{colors[j][i]}} center">
                 <span *ngIf="schedule[j] && schedule[j][i]">
-                    <ion-icon name="book" (click)="viewClass(schedule[j][i])"></ion-icon>
+                    <ion-icon name="search" (click)="viewClass(schedule[j][i])"></ion-icon>
                 </span>
                 <br>
             </ion-col>

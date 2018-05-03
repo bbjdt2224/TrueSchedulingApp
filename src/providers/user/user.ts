@@ -31,6 +31,10 @@ export class UserProvider {
         return this.uid;
     }
 
+    getName(){
+        return firebase.database().ref('users/'+this.uid)
+    }
+
     login(email: string, password: string) {
         return firebase.auth().signInWithEmailAndPassword(email, password);
     }
@@ -47,4 +51,34 @@ export class UserProvider {
         });
     }
 
+    getClasses(semester: string, year: number) {
+        return firebase.database().ref('users/'+this.uid+'/classes/'+semester+''+year);
+    }
+
+    addClass(semester, crn: number) {
+        firebase.database().ref('classes/'+semester+'/'+crn).on('value', resp => {
+            let cls = resp.val();
+            firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+cls.crn).set(cls);
+        });
+    }
+
+    removeClass(semester, crn){
+        firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+crn).remove();
+    }
+    
+    getClass(crn, semester) {
+        return firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+crn);
+    }
+
 }
+
+export const snapshotToArray = snapshot => {
+    let returnArr = [];
+    snapshot.forEach(childSnapshot => {
+        let item = childSnapshot.val();
+        item.key = childSnapshot.key;
+        returnArr.push(item);
+    });
+
+    return returnArr;
+};

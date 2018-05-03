@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { ClassesProvider } from '../../providers/classes/classes';
+
 import { classes } from '../../classes/classes';
 import { UserClasses } from '../../classes/userclasses';
 import { NewClassPage } from '../new-class/new-class';
@@ -9,6 +9,7 @@ import { ClassModalPage } from '../class-modal/class-modal';
 import { parseDate } from 'ionic-angular/util/datetime-util';
 import { GroupsPage } from '../groups/groups';
 import { UserProvider } from '../../providers/user/user';
+import { snapshotToArray } from '../../providers/user/user';
 
 
 /**
@@ -29,7 +30,7 @@ export class SchedulePage {
     currSemester: string;
     days = ['M', 'T', 'W', 'R', 'F'];
     schedule: UserClasses[][];
-    classes: UserClasses[];
+    classes = [];
     times: Date[];
     colors: String[][];
     colorClasses = ['class1','class2','class3','class4','class5']
@@ -37,7 +38,6 @@ export class SchedulePage {
     constructor(
         public navCtrl: NavController, 
         public navParams: NavParams,
-        private classesProvider: ClassesProvider,
         public menuCtrl: MenuController,
         public modalCtrl: ModalController,
         private userProvider: UserProvider
@@ -48,14 +48,11 @@ export class SchedulePage {
         console.log('ionViewDidLoad SchedulePage');
         this.currSemester = this.navParams.get('semester');
         this.getClasses();
-        console.log(this.userProvider.getUser());
     }
 
     ionViewDidEnter() {
         this.getClasses();
         this.menuCtrl.close();
-        // this.menuCtrl.enable(true, 'semester');
-        // this.menuCtrl.enable(false, 'groups');
     }
 
 
@@ -71,9 +68,8 @@ export class SchedulePage {
     }
 
     getClasses(){
-        this.classesProvider.getClasses(this.currSemester,this.currDate.getFullYear()).subscribe(classes => 
-        {
-            this.classes = classes;
+        this.userProvider.getClasses(this.currSemester,this.currDate.getFullYear()).on('value', resp => {
+            this.classes = snapshotToArray(resp);
             let start = 10;
             let end = 15;
             let schedule = new Array();
@@ -84,7 +80,7 @@ export class SchedulePage {
                 colors[i] = new Array();
             }
             this.classes.forEach(item => {
-                const time = item.class.time.split(' ');
+                const time = item.time.split(' ');
                 let istart = time[0];
                 let iend = time [2];
                 if (this.getDate(istart).getHours() < start){
@@ -98,10 +94,10 @@ export class SchedulePage {
 
             let colorIndex = 0;
             this.classes.forEach(item => {
-                const time = item.class.time.split(' ');
+                const time = item.time.split(' ');
                 let istart = time[0];
                 let iend = time [2];
-                let days = item.class.days.split('');
+                let days = item.days.split('');
                 let itemStart = parseDate(istart);
                 let itemEnd = parseDate(iend);
                 let itms = itemStart.hour+(itemStart.minute/60);
@@ -112,10 +108,12 @@ export class SchedulePage {
                         colors[this.days.indexOf(day)][this.getIndex(start, i)] = colorClasses[colorIndex];
                     }
                 });
+                colorIndex++;
             });
             this.schedule = schedule;
             this.colors = colors;
         });
+            
     }
 
     hour(time: string){
@@ -137,7 +135,7 @@ export class SchedulePage {
     }
 
     public viewClass(c: UserClasses) {
-        let classModal = this.modalCtrl.create(ClassModalPage, {class: c});
+        let classModal = this.modalCtrl.create(ClassModalPage, {class: c, semester: this.currSemester+''+this.currDate.getFullYear()});
         classModal.present();
     }
 
@@ -157,7 +155,7 @@ export class SchedulePage {
     }
 
     groupsPage(){
-        this.navCtrl.push(GroupsPage);
+        this.navCtrl.push(GroupsPage, {semester: this.currSemester, year: this.currDate.getFullYear()});
     }
 
 

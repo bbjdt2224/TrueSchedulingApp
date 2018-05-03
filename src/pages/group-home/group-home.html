@@ -8,8 +8,11 @@
 <ion-header>
 
     <ion-navbar>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">Back</button>
+        </ion-buttons>
         <ion-title>
-            {{groupRelation.group.groupName}}
+            {{group.title}}
         </ion-title>
         <ion-buttons end *ngIf="getPage() == 1">
             <button ion-button icon-only (click)="newEventPage()">
@@ -22,21 +25,20 @@
 
 
 <ion-content padding (swipe)="swipe($event)">
-    <h5 ion-text color="primary" style="text-align: center;">{{groupRelation.group.groupCode}}</h5>
     <ion-slides pager>
 
         <ion-slide>
             <h2>Messages</h2>
                 <ion-list>
                     <ion-item *ngFor="let chat of chats" no-lines>
-                        <div class="chat-message" text-right *ngIf="chat.user === name">
+                        <div class="chat-message" text-right *ngIf="chat.uid === uid">
                             <div class="right-bubble">
                                 <span class="msg-name">Me</span>
                                 <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
                                 <p text-wrap>{{chat.message}}</p>
                             </div>
                         </div>
-                        <div class="chat-message" text-left *ngIf="chat.user !== name">
+                        <div class="chat-message" text-left *ngIf="chat.uid !== uid">
                             <div class="left-bubble">
                                 <span class="msg-name">{{chat.user}}</span>
                                 <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
@@ -98,11 +100,11 @@
             </div>
             <ion-list>
                 <ion-item-divider color="light">
-                    {{monthNames[viewDate.getMonth()-1]+" "+viewDate.getDate()}}
+                    {{monthNames[viewDate.getMonth()]+" "+viewDate.getDate()}}
                 </ion-item-divider>
-                <ion-item *ngFor="let event of viewEvents[viewDate.getDate()]" class="event">
+                <ion-item *ngFor="let event of selectedEvent" class="event" (click)="viewEvent(event)">
                     <h3>{{event.title}}</h3>
-                    <h4 ion-text color="light">Time: {{formatDatetime(event.datetime)}}</h4>
+                    <h4 ion-text color="primary">Time: {{formatDatetime(event.datetime)}}</h4>
                 </ion-item>
             </ion-list>
         </ion-slide>

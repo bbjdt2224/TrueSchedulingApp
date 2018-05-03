@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { classes } from '../../classes/classes';
 import { UserClasses } from '../../classes/userclasses';
-import { ClassesProvider } from '../../providers/classes/classes';
+import { UserProvider } from '../../providers/user/user';
 
 /**
  * Generated class for the ClassModalPage page.
@@ -18,27 +18,27 @@ import { ClassesProvider } from '../../providers/classes/classes';
 })
 export class ClassModalPage {
 
-    uc = new UserClasses();
     c = new classes();
     start = '';
     end = '';
+    semester = '';
 
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
         private viewCtrl: ViewController,
         private alertCtrl: AlertController,
-        private classesProvider: ClassesProvider
+        private userProvider: UserProvider
     ) {
     }
 
     ionViewDidLoad() {
         console.log('ionViewDidLoad ClassModalPage');
-        this.uc = this.navParams.get('class');
-        this.c = this.uc.class;
+        this.c = this.navParams.get('class');
         const time = this.c.time.split(' ');
         this.start = this.formatTime(time[0]);
         this.end = this.formatTime(time[2]);
+        this.semester = this.navParams.get('semester');
     }
 
     dismiss() {
@@ -60,9 +60,8 @@ export class ClassModalPage {
                 {
                     text: 'Delete',
                     handler: () => {
-                        this.classesProvider.deleteClass(this.uc).subscribe(cls => {
-                            this.dismiss();
-                        });
+                        this.userProvider.removeClass(this.semester, this.c.crn);
+                        this.navCtrl.pop();
                     }
                 }
             ]

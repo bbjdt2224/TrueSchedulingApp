@@ -7,6 +7,9 @@
 <ion-header>
 
     <ion-navbar>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">Back</button>
+        </ion-buttons>
         <ion-title>NewEvent</ion-title>
     </ion-navbar>
 
@@ -28,10 +31,15 @@
             <ion-input [(ngModel)]="event.title"></ion-input>
         </ion-item>
         <ion-item>
+            <ion-label>Location</ion-label>
+            <ion-input [(ngModel)]="event.location"></ion-input>
+        </ion-item>
+        <ion-item>
             <ion-label>Description</ion-label>
             <ion-textarea [(ngModel)]="event.description"></ion-textarea>
         </ion-item>
 
-        <button ion-button (click)="addEvent()">Add</button>
+        <button ion-button (click)="addEvent()">Done</button>
+        <h2>{{error}}</h2>
     </ion-list>
 </ion-content>

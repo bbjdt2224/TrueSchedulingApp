@@ -28,9 +28,29 @@
             <ion-label>Year</ion-label>
             <ion-datetime displayFormat="YYYY" min="2016" max="2030" [(ngModel)]="year"></ion-datetime>
         </ion-item>
+
+        <ion-list-header>
+            Classes
+        </ion-list-header>
         <ion-item>
             <ion-label>CRN</ion-label>
-            <ion-input type="number" [(ngModel)]="crn"></ion-input>
+            <ion-input type="number" [(ngModel)]="crn[0]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[1]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[2]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[3]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[4]"></ion-input>
         </ion-item>
     </ion-list>
     <button ion-button (click)="addClass()">Add</button>

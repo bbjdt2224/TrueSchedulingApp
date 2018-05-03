@@ -15,19 +15,19 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item (click)="newGroup()">
+        <!-- <ion-item (click)="newGroup()">
             <ion-icon name="add"></ion-icon>
             New Group
         </ion-item>
         <ion-item (click)="joinGroup()">
             <ion-icon name="people"></ion-icon>
             Join Group
-        </ion-item>
+        </ion-item> -->
         <ion-item-divider color="light">
             My Groups
         </ion-item-divider>
-        <ion-item *ngFor="let g of groupRelations" (click)="groupHome(g)">
-            {{g.group.groupName}}
+        <ion-item *ngFor="let g of groups" (click)="groupHome(g.crn)">
+            {{g.title}}
         </ion-item>
     </ion-list>
 </ion-content>

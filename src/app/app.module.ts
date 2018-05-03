@@ -15,8 +15,8 @@ import { NewGroupPage } from '../pages/new-group/new-group';
 import { GroupHomePage } from '../pages/group-home/group-home';
 import { NewEventPage } from '../pages/new-event/new-event';
 import { GroupsPage } from '../pages/groups/groups';
+import { EditEventPage } from '../pages/edit-event/edit-event'; 
 import { UserProvider } from '../providers/user/user';
-import { ClassesProvider } from '../providers/classes/classes';
 import { GroupsProvider } from '../providers/groups/groups';
 import { EventsProvider } from '../providers/events/events';
 import { ChatProvider } from '../providers/chat/chat';
@@ -32,7 +32,8 @@ import { ChatProvider } from '../providers/chat/chat';
     NewGroupPage,
     GroupHomePage,
     NewEventPage,
-    GroupsPage
+    GroupsPage,
+    EditEventPage
   ],
   imports: [
     BrowserModule,
@@ -50,14 +51,14 @@ import { ChatProvider } from '../providers/chat/chat';
     NewGroupPage,
     GroupHomePage,
     NewEventPage,
-    GroupsPage
+    GroupsPage,
+    EditEventPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
-    ClassesProvider,
     GroupsProvider,
     EventsProvider,
     ChatProvider

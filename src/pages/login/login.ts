@@ -36,7 +36,7 @@ export class LoginPage {
 
     login(){
         this.userProvider.login(this.email, this.password).then(
-            success => {this.userProvider.setUser(success.uid); this.navCtrl.setRoot(SchedulePage)},
+            success => {this.userProvider.setUser(success.uid); this.navCtrl.setRoot(SchedulePage, {semester: this.findSemester()})},
             error => this.errormsg = error
         );
         
@@ -47,10 +47,10 @@ export class LoginPage {
     }
 
     findSemester(): String {
-        if (this.currDate.getMonth() < 4) {
+        if (this.currDate.getMonth() < 5) {
             return 'Spring';
         }
-        else if(this.currDate.getMonth() >= 4 && this.currDate.getMonth() <= 6 ){
+        else if(this.currDate.getMonth() >= 5 && this.currDate.getMonth() <= 6 ){
             return 'Summer I';
         }
         else if(this.currDate.getMonth() >= 6 && this.currDate.getMonth() <= 8){
