@@ -5,7 +5,6 @@ import { NewGroupPage } from '../new-group/new-group';
 import { GroupHomePage } from '../group-home/group-home';
 import { UserProvider } from '../../providers/user/user';
 import { snapshotToArray } from '../../providers/user/user';
-import { GroupRelation } from '../../classes/grouprelation';
 
 /**
  * Generated class for the GroupsPage page.

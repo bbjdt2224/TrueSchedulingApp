@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Group } from '../../classes/group';
-import { GroupsProvider } from '../../providers/groups/groups';
 
 /**
  * Generated class for the NewGroupPage page.
@@ -22,7 +21,6 @@ export class NewGroupPage {
     constructor(
         public navCtrl: NavController, 
         public navParams: NavParams,
-        private groupsProvider: GroupsProvider
     ) {
     }
 
@@ -30,20 +28,20 @@ export class NewGroupPage {
         console.log('ionViewDidLoad NewGroupPage');
     }
 
-    addGroup() {
-        let code = Math.floor(Math.random()*100000);
+    // addGroup() {
+    //     let code = Math.floor(Math.random()*100000);
 
-        this.groupsProvider.checkCode(code).subscribe(response => {
-            if(response){
-                this.group.groupCode = code;
-                this.groupsProvider.newGroup(this.group).subscribe(done => {
-                    this.navCtrl.pop();
-                });
-            }
-            else {
-                this.addGroup();
-            }
-        })
-    }
+    //     this.groupsProvider.checkCode(code).subscribe(response => {
+    //         if(response){
+    //             this.group.groupCode = code;
+    //             this.groupsProvider.newGroup(this.group).subscribe(done => {
+    //                 this.navCtrl.pop();
+    //             });
+    //         }
+    //         else {
+    //             this.addGroup();
+    //         }
+    //     })
+    // }
 
 }

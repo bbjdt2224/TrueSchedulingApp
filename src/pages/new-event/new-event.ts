@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Events } from '../../classes/events';
 import { ChatProvider } from '../../providers/chat/chat';
-import { GroupRelation } from '../../classes/grouprelation';
 import { UserProvider } from '../../providers/user/user';
 
 /**

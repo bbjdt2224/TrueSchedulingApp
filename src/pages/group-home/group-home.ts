@@ -6,12 +6,10 @@ import { MenuController } from 'ionic-angular';
 import { SchedulePage } from '../schedule/schedule';
 import { ViewChild } from '@angular/core';
 import { NewEventPage } from '../new-event/new-event';
-import { EventsProvider } from '../../providers/events/events';
 import { UserProvider } from '../../providers/user/user';
 import { ChatProvider } from '../../providers/chat/chat';
 import { Events } from '../../classes/events';
 import { ModalController } from 'ionic-angular';
-import { parseDate } from 'ionic-angular/util/datetime-util';
 import { EditEventPage } from '../edit-event/edit-event';
 import * as firebase from 'firebase';
 
@@ -62,7 +60,6 @@ export class GroupHomePage {
         public navCtrl: NavController,
         public navParams: NavParams,
         private menuCtrl: MenuController,
-        private eventsProvider: EventsProvider,
         private modalCtrl: ModalController,
         private userProvider: UserProvider,
         private chatProvider: ChatProvider,
