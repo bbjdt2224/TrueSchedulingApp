@@ -1,7 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { User } from '../../classes/user';
 import * as firebase from 'firebase/app';
 
 /*
@@ -12,16 +9,12 @@ import * as firebase from 'firebase/app';
 */
 
 
-const httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
-};
-
 @Injectable()
 export class UserProvider {
 
     uid = '';
 
-    constructor(private http: HttpClient) { }
+    constructor() { }
 
     setUser(uid) {
         this.uid = uid

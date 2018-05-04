@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-import { classes } from '../../classes/classes';
 import { UserClasses } from '../../classes/userclasses';
 import { NewClassPage } from '../new-class/new-class';
 import { MenuController } from 'ionic-angular';

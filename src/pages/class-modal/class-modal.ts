@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { classes } from '../../classes/classes';
-import { UserClasses } from '../../classes/userclasses';
 import { UserProvider } from '../../providers/user/user';
 
 /**

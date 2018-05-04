@@ -17,23 +17,21 @@ import { NewEventPage } from '../pages/new-event/new-event';
 import { GroupsPage } from '../pages/groups/groups';
 import { EditEventPage } from '../pages/edit-event/edit-event'; 
 import { UserProvider } from '../providers/user/user';
-import { GroupsProvider } from '../providers/groups/groups';
-import { EventsProvider } from '../providers/events/events';
 import { ChatProvider } from '../providers/chat/chat';
 
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage,
-    SignUpPage,
-    SchedulePage,
-    NewClassPage,
-    ClassModalPage,
-    NewGroupPage,
-    GroupHomePage,
-    NewEventPage,
-    GroupsPage,
-    EditEventPage
+    //LoginPage,
+    //SignUpPage,
+    //SchedulePage,
+    //NewClassPage,
+    //ClassModalPage,
+    //NewGroupPage,
+    //GroupHomePage,
+    //NewEventPage,
+    //GroupsPage,
+    //EditEventPage
   ],
   imports: [
     BrowserModule,
@@ -59,8 +57,6 @@ import { ChatProvider } from '../providers/chat/chat';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
-    GroupsProvider,
-    EventsProvider,
     ChatProvider
   ]
 })
