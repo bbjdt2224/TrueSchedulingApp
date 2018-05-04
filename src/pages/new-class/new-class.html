@@ -1,0 +1,57 @@
+<!--
+  Generated template for the NewClassPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+    <ion-navbar>
+        <ion-title>New Class</ion-title>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item>
+            <ion-label>Semester</ion-label>
+            <ion-select [(ngModel)]="semester">
+                <ion-option value="Spring">Spring</ion-option>
+                <ion-option value="Summer I">Summer I</ion-option>
+                <ion-option value="Summer II">Summer II</ion-option>
+                <ion-option value="Fall">Fall</ion-option>
+            </ion-select>
+        </ion-item>
+        <ion-item>
+            <ion-label>Year</ion-label>
+            <ion-datetime displayFormat="YYYY" min="2016" max="2030" [(ngModel)]="year"></ion-datetime>
+        </ion-item>
+
+        <ion-list-header>
+            Classes
+        </ion-list-header>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[0]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[1]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[2]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[3]"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>CRN</ion-label>
+            <ion-input type="number" [(ngModel)]="crn[4]"></ion-input>
+        </ion-item>
+    </ion-list>
+    <button ion-button (click)="addClass()">Add</button>
+</ion-content>

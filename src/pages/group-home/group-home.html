@@ -1,0 +1,112 @@
+<!--
+  Generated template for the GroupHomePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+
+<ion-header>
+
+    <ion-navbar>
+        <ion-buttons start>
+            <button ion-button (click)="dismiss()">Back</button>
+        </ion-buttons>
+        <ion-title>
+            {{group.title}}
+        </ion-title>
+        <ion-buttons end *ngIf="getPage() == 1">
+            <button ion-button icon-only (click)="newEventPage()">
+                <ion-icon color="primary" name="add-circle"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding (swipe)="swipe($event)">
+    <ion-slides pager>
+
+        <ion-slide>
+            <h2>Messages</h2>
+                <ion-list>
+                    <ion-item *ngFor="let chat of chats" no-lines>
+                        <div class="chat-message" text-right *ngIf="chat.uid === uid">
+                            <div class="right-bubble">
+                                <span class="msg-name">Me</span>
+                                <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
+                                <p text-wrap>{{chat.message}}</p>
+                            </div>
+                        </div>
+                        <div class="chat-message" text-left *ngIf="chat.uid !== uid">
+                            <div class="left-bubble">
+                                <span class="msg-name">{{chat.user}}</span>
+                                <span class="msg-date">{{chat.sendDate | date:'short'}}</span>
+                                <p text-wrap>{{chat.message}}</p>
+                            </div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            <ion-footer>
+                <ion-grid>
+                    <ion-row>
+                        <ion-col col-10>
+                            <ion-input type="text" placeholder="Type a message" [(ngModel)]="message" name="message"></ion-input>
+                        </ion-col>
+                        <ion-col col-2 (click)="sendMessage()">
+                            <ion-icon name="paper-plane"></ion-icon>
+                        </ion-col>
+                    </ion-row>
+                </ion-grid>
+            </ion-footer>
+        </ion-slide>
+
+        <ion-slide>
+            <h2>Calendar</h2>
+            <div class="header">
+                <ion-row class="month">
+                    <ion-col col-2 (click)="goToLastMonth()">
+                        <ion-icon name="arrow-back"></ion-icon>
+                    </ion-col>
+                    <ion-col col-8>{{currentMonth}} {{currentYear}}</ion-col>
+                    <ion-col col-2 (click)="goToNextMonth()">
+                        <ion-icon name="arrow-forward"></ion-icon>
+                    </ion-col>
+                </ion-row>
+            </div>
+            <div class="body">
+                <ion-grid>
+                    <ion-row class="days">
+                        <ion-col>Su</ion-col>
+                        <ion-col>Mo</ion-col>
+                        <ion-col>Tu</ion-col>
+                        <ion-col>We</ion-col>
+                        <ion-col>Th</ion-col>
+                        <ion-col>Fr</ion-col>
+                        <ion-col>Sa</ion-col>
+                    </ion-row>
+                    <ion-row class="date">
+                        <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month">{{lastDay}}</ion-col>
+                        <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="selectDay(day)">
+                            <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
+                            <ng-template #otherDate class="otherDate">{{day}}
+                                <br>
+                                <div class="event-bullet" *ngIf="checkEvent(day)"></div>
+                            </ng-template>
+                        </ion-col>
+                        <ion-col col-1 *ngFor="let nextDay of daysInNextMonth" class="next-month">{{nextDay}}</ion-col>
+                    </ion-row>
+                </ion-grid>
+            </div>
+            <ion-list>
+                <ion-item-divider color="light">
+                    {{monthNames[viewDate.getMonth()]+" "+viewDate.getDate()}}
+                </ion-item-divider>
+                <ion-item *ngFor="let event of selectedEvent" class="event" (click)="viewEvent(event)">
+                    <h3>{{event.title}}</h3>
+                    <h4 ion-text color="primary">Time: {{formatDatetime(event.datetime)}}</h4>
+                </ion-item>
+            </ion-list>
+        </ion-slide>
+    </ion-slides>
+</ion-content>
