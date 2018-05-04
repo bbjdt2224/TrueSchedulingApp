@@ -133,6 +133,7 @@ export class GroupHomePage {
         this.chatProvider.getEvents(this.semester, this.crn).on('value', resp => {
             this.events = snapshotToArray(resp);
             this.getDaysOfMonth();
+            this.getTodayEvents();
         })
     }
 
@@ -286,6 +287,18 @@ export class GroupHomePage {
         }
         return h+":"+m+" "+n;
         
+    }
+
+    getTodayEvents(){
+        this.selectedEvent = [];
+        let viewDate = this.viewDate;
+        this.events.forEach(event => {
+            let e = new Date(event.datetime);
+            if (e.getFullYear() == viewDate.getFullYear() && e.getMonth() == viewDate.getMonth() && e.getDate() == viewDate.getDate()) {
+                this.isSelected = true;
+                this.selectedEvent.push(event);
+            }
+        });
     }
 
     dismiss(){

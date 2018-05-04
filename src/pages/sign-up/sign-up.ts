@@ -21,6 +21,7 @@ export class SignUpPage {
     password = '';
     name = '';
     cpassword = '';
+    error = '';
 
     constructor(
         public navCtrl: NavController,
@@ -38,7 +39,11 @@ export class SignUpPage {
             this.userProvider.signup(this.email, this.password).then( success => {
                 this.userProvider.addUser(this.name, success.uid);
                 this.navCtrl.setRoot(SchedulePage);
-            });
+            },
+        error=> this.error = error);
+        }
+        else{
+            this.error = 'The password and confirmation password do not match';
         }
     }
 

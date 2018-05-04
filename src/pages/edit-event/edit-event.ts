@@ -39,6 +39,11 @@ export class EditEventPage {
     this.dismiss();
   }
 
+  deleteEvent(){
+    this.chatProvider.deleteEvent(this.semester, this.crn, this.event.key);
+    this.dismiss();
+  }
+
   dismiss(){
     this.navCtrl.pop();
   }

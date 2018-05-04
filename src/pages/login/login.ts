@@ -47,10 +47,10 @@ export class LoginPage {
     }
 
     findSemester(): String {
-        if (this.currDate.getMonth() < 5) {
+        if (this.currDate.getMonth() < 4) {
             return 'Spring';
         }
-        else if(this.currDate.getMonth() >= 5 && this.currDate.getMonth() <= 6 ){
+        else if(this.currDate.getMonth() >= 4 && this.currDate.getMonth() <= 6 ){
             return 'Summer I';
         }
         else if(this.currDate.getMonth() >= 6 && this.currDate.getMonth() <= 8){

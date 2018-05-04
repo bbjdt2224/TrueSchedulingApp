@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { UserClasses } from '../../classes/userclasses';
-import { classes } from '../../classes/classes';
 import { UserProvider } from '../../providers/user/user';
 
 /**
@@ -21,6 +19,7 @@ export class NewClassPage {
     semester: string;
     year: string;
     crn = [];
+    errors = [];
 
     constructor(
         public navCtrl: NavController,
@@ -36,9 +35,10 @@ export class NewClassPage {
     addClass() {
         this.crn.forEach(c => {
             c = parseInt(c);
-            this.userProvider.addClass(this.semester + '' + this.year, c);
+             this.userProvider.addClass(this.semester + '' + this.year, c);
         })
         this.navCtrl.pop();
+
     }
 
 }

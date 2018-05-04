@@ -58,7 +58,9 @@ export class UserProvider {
     addClass(semester, crn: number) {
         firebase.database().ref('classes/'+semester+'/'+crn).on('value', resp => {
             let cls = resp.val();
-            firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+cls.crn).set(cls);
+            if(cls){
+                firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+cls.crn).set(cls);
+            }
         });
     }
 
