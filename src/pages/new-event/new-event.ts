@@ -17,7 +17,12 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class NewEventPage {
 
-    event;
+    event = {
+        title: '',
+        description: '',
+        location: '',
+        datetime: new Date
+    };
     date = new Date();
     time = new Date();
     semester;
