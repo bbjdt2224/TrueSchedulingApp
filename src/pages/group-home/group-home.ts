@@ -1,11 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides, Content, AlertController } from 'ionic-angular';
-import { MenuController } from 'ionic-angular';
 import { ViewChild } from '@angular/core';
 import { UserProvider } from '../../providers/user/user';
 import { ChatProvider } from '../../providers/chat/chat';
 import { ModalController } from 'ionic-angular';
-import * as firebase from 'firebase';
 
 /**
  * Generated class for the GroupHomePage page.
@@ -53,7 +51,6 @@ export class GroupHomePage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private menuCtrl: MenuController,
         private modalCtrl: ModalController,
         private userProvider: UserProvider,
         private chatProvider: ChatProvider,
@@ -76,8 +73,6 @@ export class GroupHomePage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad GroupHomePage');
         this.getEvents();
-        this.menuCtrl.enable(true, 'semeser');
-        this.menuCtrl.enable(false, 'groups');
         this.getChats();
     }
 
@@ -98,14 +93,9 @@ export class GroupHomePage {
     }
 
     getChats(){
-        firebase.database().ref('classes/'+this.year+'/'+this.semester+'/'+this.crn+'/messages').on('value', resp => {
+        this.chatProvider.getMessages(this.year, this.semester, this.crn).on('value', resp => {
             this.chats = [];
             this.chats = snapshotToArray(resp);
-            // setTimeout(() => {
-            //   if(this.offStatus === false) {
-            //     this.content.scrollToBottom(300);
-            //   }
-            // }, 1000);
           });
     }
 
@@ -114,10 +104,6 @@ export class GroupHomePage {
         this.message = '';
       }
       
-
-    goback() {
-        this.navCtrl.setRoot('SchedulePage', { semester: this.semester });
-    }
 
     getEvents() {
         this.chatProvider.getEvents(this.semester, this.year, this.crn).on('value', resp => {
@@ -186,7 +172,6 @@ export class GroupHomePage {
             });
             alert.present(); 
         }
-        
     }
 
     getDaysOfMonth() {
@@ -215,7 +200,6 @@ export class GroupHomePage {
         }
 
         var lastDayThisMonth = new Date(this.date.getFullYear(), this.date.getMonth() + 1, 0).getDay();
-        //var nextNumOfDays = new Date(this.date.getFullYear(), this.date.getMonth() + 2, 0).getDate();
         for (i = 0; i < (6 - lastDayThisMonth); i++) {
             this.daysInNextMonth.push(i + 1);
         }
@@ -276,7 +260,6 @@ export class GroupHomePage {
             return h+":00 "+n;
         }
         return h+":"+m+" "+n;
-        
     }
 
     getTodayEvents(){

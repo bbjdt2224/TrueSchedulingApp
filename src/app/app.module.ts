@@ -13,7 +13,7 @@ import { ChatProvider } from '../providers/chat/chat';
 @NgModule({
   declarations: [
     MyApp,
-    LoginPage
+    //LoginPage
   ],
   imports: [
     BrowserModule,
