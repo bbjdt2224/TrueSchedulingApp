@@ -23,4 +23,12 @@ page-schedule {
     .class5{
         background-color: lightgray;
     }
+
+    #sign-out{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        border-top: 1px solid rgba(153,171,188,0.5);
+    }
 }

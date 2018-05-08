@@ -5,6 +5,7 @@ import { MenuController } from 'ionic-angular';
 import { parseDate } from 'ionic-angular/util/datetime-util';
 import { UserProvider } from '../../providers/user/user';
 import { snapshotToArray } from '../../providers/user/user';
+import { LoginPage } from '../login/login';
 
 
 /**
@@ -152,6 +153,10 @@ export class SchedulePage {
 
     groupsPage(){
         this.navCtrl.push('GroupsPage', {semester: this.currSemester, year: this.currDate.getFullYear()});
+    }
+
+    signout(){
+        this.navCtrl.setRoot(LoginPage);
     }
 
 

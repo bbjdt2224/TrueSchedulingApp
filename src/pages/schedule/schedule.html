@@ -13,6 +13,12 @@
             <ion-item (click)="changeSemester('Summer I')">Summer I</ion-item>
             <ion-item (click)="changeSemester('Summer II')">Summer II</ion-item>
             <ion-item (click)="changeSemester('Fall')">Fall</ion-item>
+            <ion-item id="sign-out" (click)="signout()">
+                <div class="inner-text">
+                    <ion-icon name="log-out"></ion-icon>
+                    Sign Out
+                </div>
+            </ion-item>
         </ion-list>
     </ion-content>
 </ion-menu>
