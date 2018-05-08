@@ -36,9 +36,10 @@ page-group-home {
         border-radius: 30px;
       }
       .selected-date {
-        width: 20px;
-        height: 2px;
         background-color: blue;
+        color: white;
+        border-radius: 1em;
+        width: 10px;
       }
       .unselected-date {
         border: none;

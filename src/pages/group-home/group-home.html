@@ -87,7 +87,7 @@
                     </ion-row>
                     <ion-row class="date">
                         <ion-col col-1 *ngFor="let lastDay of daysInLastMonth" class="last-month">{{lastDay}}</ion-col>
-                        <ion-col col-1 *ngFor="let day of daysInThisMonth" (click)="selectDay(day)">
+                        <ion-col col-1 *ngFor="let day of daysInThisMonth; let i of index" (click)="selectDay(day)" class="{{dayClasses[i]}}">
                             <span class="currentDate" *ngIf="currentDate === day; else otherDate">{{day}}</span>
                             <ng-template #otherDate class="otherDate">{{day}}
                                 <br>

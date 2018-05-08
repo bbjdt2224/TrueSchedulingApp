@@ -31,6 +31,7 @@ export class GroupHomePage {
     isSelected = false;
     viewDate = new Date();
     viewEvents = new Array();
+    dayClasses = new Array();
 
     chats = [];
     name = '';
@@ -236,6 +237,8 @@ export class GroupHomePage {
 
     selectDay(day) {
         var thisDate1 = new Date(this.date.getFullYear(), this.date.getMonth(), day);
+        this.dayClasses = [];
+        this.dayClasses[day] = 'selected-date';
         this.selectedEvent = [];
         this.events.forEach(event => {
             let e = new Date(event.datetime);
