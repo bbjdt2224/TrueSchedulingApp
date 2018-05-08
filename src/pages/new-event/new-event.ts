@@ -23,8 +23,6 @@ export class NewEventPage {
         location: '',
         datetime: new Date
     };
-    date = new Date();
-    time = new Date();
     semester;
     year;
     crn;
@@ -47,10 +45,10 @@ export class NewEventPage {
     }
 
     addEvent() {
-        if (this.date == null || this.time == null || this.event.title == null || this.event.location == null) {
+        if (this.event.datetime == null || this.event.title == null || this.event.location == null) {
             this.error = 'Please fill out all fields';
         } else {
-            this.event.datetime = new Date(this.time + ' ' + this.date);
+            this.event.datetime = new Date(this.event.datetime);
             this.chatprovider.addEvent(this.semester, this.year, this.crn, this.event.title, this.event.datetime, this.event.location, this.event.description, this.userProvider.getUser());
             this.navCtrl.pop();
         }

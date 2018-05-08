@@ -20,11 +20,11 @@
     <ion-list>
         <ion-item>
             <ion-label>Date</ion-label>
-            <ion-datetime displayFormat="MM/DD/YYYY" min="2016" max="2030" [(ngModel)]="date"></ion-datetime>
+            <ion-datetime displayFormat="MM/DD/YYYY" min="2016" max="2030" [(ngModel)]="event.datetime"></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label>Time</ion-label>
-            <ion-datetime displayFormat="h:mm a" [(ngModel)]="time"></ion-datetime>
+            <ion-datetime displayFormat="h:mm a" [(ngModel)]="event.datetime"></ion-datetime>
         </ion-item>
         <ion-item>
             <ion-label>Title</ion-label>
