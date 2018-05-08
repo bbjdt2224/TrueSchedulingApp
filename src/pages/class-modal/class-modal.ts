@@ -16,7 +16,13 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class ClassModalPage {
 
-    c;
+    c = {
+        title: '',
+        building: '',
+        room: '',
+        time: '',
+        crn: ''
+    };
     start = '';
     end = '';
     semester = '';

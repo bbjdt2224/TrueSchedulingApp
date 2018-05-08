@@ -15,6 +15,10 @@ export class ChatProvider {
         console.log('Hello ChatProvider Provider');
     }
 
+    getMessages(year, semester, crn){
+        return firebase.database().ref('classes/'+year+'/'+semester+'/'+crn+'/messages');
+    }
+
     sendMessage(message: string, uid, user, crn, semester, year) {
         let newData = firebase.database().ref('classes/' + year + '/' + semester + '/' + crn + '/messages').push();
         newData.set({
