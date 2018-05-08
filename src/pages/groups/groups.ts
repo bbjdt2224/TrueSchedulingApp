@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { AlertController } from 'ionic-angular';
-import { NewGroupPage } from '../new-group/new-group';
-import { GroupHomePage } from '../group-home/group-home';
 import { UserProvider } from '../../providers/user/user';
 import { snapshotToArray } from '../../providers/user/user';
 
@@ -50,7 +48,7 @@ export class GroupsPage {
     }
 
     newGroup() {
-        this.navCtrl.push(NewGroupPage);
+        this.navCtrl.push('NewGroupPage');
     }
 
     joinGroup() {
@@ -91,7 +89,7 @@ export class GroupsPage {
     }
 
     groupHome(crn) {
-        this.navCtrl.setRoot(GroupHomePage, { group: crn, semester: this.semester+''+this.year})
+        this.navCtrl.setRoot('GroupHomePage', { group: crn, semester: this.semester, year: this.year})
     }
 
 }

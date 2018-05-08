@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
-import { classes } from '../../classes/classes';
 import { UserProvider } from '../../providers/user/user';
 
 /**
@@ -17,10 +16,11 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class ClassModalPage {
 
-    c = new classes();
+    c;
     start = '';
     end = '';
     semester = '';
+    year;
 
     constructor(
         public navCtrl: NavController,
@@ -38,6 +38,7 @@ export class ClassModalPage {
         this.start = this.formatTime(time[0]);
         this.end = this.formatTime(time[2]);
         this.semester = this.navParams.get('semester');
+        this.year = this.navParams.get('year');
     }
 
     dismiss() {
@@ -59,7 +60,7 @@ export class ClassModalPage {
                 {
                     text: 'Delete',
                     handler: () => {
-                        this.userProvider.removeClass(this.semester, this.c.crn);
+                        this.userProvider.removeClass(this.semester, this.year, this.c.crn);
                         this.navCtrl.pop();
                     }
                 }

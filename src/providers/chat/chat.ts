@@ -15,8 +15,8 @@ export class ChatProvider {
         console.log('Hello ChatProvider Provider');
     }
 
-    sendMessage(message: string, uid, user, crn, semester) {
-        let newData = firebase.database().ref('classes/' + semester + '/' + crn + '/messages').push();
+    sendMessage(message: string, uid, user, crn, semester, year) {
+        let newData = firebase.database().ref('classes/' + year + '/' + semester + '/' + crn + '/messages').push();
         newData.set({
             uid: uid,
             user: user,
@@ -25,8 +25,8 @@ export class ChatProvider {
         });
     }
 
-    addEvent(semester, crn, title, date: Date, location, description, uid){
-        firebase.database().ref('classes/'+semester+'/'+crn+'/events').push().set({
+    addEvent(semester, year, crn, title, date: Date, location, description, uid){
+        firebase.database().ref('classes/'+year+'/'+semester+'/'+crn+'/events').push().set({
             title: title,
             location: location,
             description: description,
@@ -36,15 +36,15 @@ export class ChatProvider {
         });
     }
 
-    getEvents(semester, crn){
-        return firebase.database().ref('classes/'+semester+'/'+crn+'/events');
+    getEvents(semester, year, crn){
+        return firebase.database().ref('classes/'+year+'/'+semester+'/'+crn+'/events');
     }
 
-    editEvent(semester, crn, key, event){
-        firebase.database().ref('classes/'+semester+'/'+crn+'/events/'+key).update(event);
+    editEvent(semester, year, crn, key, event){
+        firebase.database().ref('classes/'+year+'/'+semester+'/'+crn+'/events/'+key).update(event);
     }
 
-    deleteEvent(semester, crn, key){
-        firebase.database().ref('classes/'+semester+'/'+crn+'/events/'+key).remove();
+    deleteEvent(semester, year, crn, key){
+        firebase.database().ref('classes/'+year+'/'+semester+'/'+crn+'/events/'+key).remove();
     }
 }

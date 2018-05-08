@@ -45,24 +45,24 @@ export class UserProvider {
     }
 
     getClasses(semester: string, year: number) {
-        return firebase.database().ref('users/'+this.uid+'/classes/'+semester+''+year);
+        return firebase.database().ref('users/'+this.uid+'/classes/'+year+'/'+semester);
     }
 
-    addClass(semester, crn: number) {
-        firebase.database().ref('classes/'+semester+'/'+crn).on('value', resp => {
+    addClass(semester, year, crn: number) {
+        firebase.database().ref('classes/'+year+'/'+semester+'/'+crn).on('value', resp => {
             let cls = resp.val();
             if(cls){
-                firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+cls.crn).set(cls);
+                firebase.database().ref('users/'+this.uid+'/classes/'+year+'/'+semester+'/'+cls.crn).set(cls);
             }
         });
     }
 
-    removeClass(semester, crn){
-        firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+crn).remove();
+    removeClass(semester, year, crn){
+        firebase.database().ref('users/'+this.uid+'/classes/'+year+'/'+semester+'/'+crn).remove();
     }
     
-    getClass(crn, semester) {
-        return firebase.database().ref('users/'+this.uid+'/classes/'+semester+'/'+crn);
+    getClass(crn, semester, year) {
+        return firebase.database().ref('users/'+this.uid+'/classes/'+year+'/'+semester+'/'+crn);
     }
 
 }

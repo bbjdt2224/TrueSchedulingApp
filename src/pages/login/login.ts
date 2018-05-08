@@ -1,7 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { SignUpPage } from '../sign-up/sign-up';
-import { SchedulePage } from '../schedule/schedule';
 import { UserProvider } from '../../providers/user/user';
 
 /**
@@ -36,14 +34,14 @@ export class LoginPage {
 
     login(){
         this.userProvider.login(this.email, this.password).then(
-            success => {this.userProvider.setUser(success.uid); this.navCtrl.setRoot(SchedulePage, {semester: this.findSemester()})},
+            success => {this.userProvider.setUser(success.uid); this.navCtrl.setRoot('SchedulePage', {semester: this.findSemester()})},
             error => this.errormsg = error
         );
         
     }
 
     signup(){
-        this.navCtrl.push(SignUpPage);
+        this.navCtrl.push('SignUpPage');
     }
 
     findSemester(): String {
