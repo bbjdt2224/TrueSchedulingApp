@@ -17,7 +17,7 @@ import { UserProvider } from '../../providers/user/user';
 export class NewClassPage {
 
     semester: string;
-    year: string;
+    year;
     crn = [];
     errors = [];
 
@@ -35,10 +35,14 @@ export class NewClassPage {
     addClass() {
         this.crn.forEach(c => {
             c = parseInt(c);
-             this.userProvider.addClass(this.semester + '' + this.year, c);
+             this.userProvider.addClass(this.semester, this.year, c);
         })
         this.navCtrl.pop();
 
+    }
+
+    goBack(){
+        this.navCtrl.pop();
     }
 
 }

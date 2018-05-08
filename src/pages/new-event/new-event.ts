@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Events } from '../../classes/events';
 import { ChatProvider } from '../../providers/chat/chat';
 import { UserProvider } from '../../providers/user/user';
 
@@ -18,10 +17,11 @@ import { UserProvider } from '../../providers/user/user';
 })
 export class NewEventPage {
 
-    event = new Events();
+    event;
     date = new Date();
     time = new Date();
     semester;
+    year;
     crn;
     error = '';
 
@@ -32,6 +32,7 @@ export class NewEventPage {
         private userProvider: UserProvider
     ) {
         this.semester = this.navParams.get('semester');
+        this.year = this.navParams.get('year');
         this.crn = this.navParams.get('crn');
         this.event.description = '';
     }
@@ -45,7 +46,7 @@ export class NewEventPage {
             this.error = 'Please fill out all fields';
         } else {
             this.event.datetime = new Date(this.time + ' ' + this.date);
-            this.chatprovider.addEvent(this.semester, this.crn, this.event.title, this.event.datetime, this.event.location, this.event.description, this.userProvider.getUser());
+            this.chatprovider.addEvent(this.semester, this.year, this.crn, this.event.title, this.event.datetime, this.event.location, this.event.description, this.userProvider.getUser());
             this.navCtrl.pop();
         }
 

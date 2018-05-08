@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-import { Group } from '../../classes/group';
 
 /**
  * Generated class for the NewGroupPage page.
@@ -16,7 +15,7 @@ import { Group } from '../../classes/group';
 })
 export class NewGroupPage {
 
-    group = new Group();
+    group;
 
     constructor(
         public navCtrl: NavController, 

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
-import { SchedulePage } from '../schedule/schedule';
 
 /**
  * Generated class for the SignUpPage page.
@@ -38,7 +37,7 @@ export class SignUpPage {
         if (this.password === this.cpassword) {
             this.userProvider.signup(this.email, this.password).then( success => {
                 this.userProvider.addUser(this.name, success.uid);
-                this.navCtrl.setRoot(SchedulePage);
+                this.navCtrl.setRoot('SchedulePage');
             },
         error=> this.error = error);
         }

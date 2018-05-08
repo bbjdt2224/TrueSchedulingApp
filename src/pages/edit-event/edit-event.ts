@@ -18,6 +18,7 @@ export class EditEventPage {
 
   event;
   semester;
+  year;
   crn;
 
   constructor(
@@ -27,6 +28,7 @@ export class EditEventPage {
   ) {
     this.event = this.navParams.get('event');
     this.semester = this.navParams.get('semester');
+    this.year = this.navParams.get('year');
     this.crn = this.navParams.get('crn');
   }
 
@@ -35,12 +37,12 @@ export class EditEventPage {
   }
 
   editEvent(){
-    this.chatProvider.editEvent(this.semester, this.crn, this.event.key, this.event);
+    this.chatProvider.editEvent(this.semester, this.year, this.crn, this.event.key, this.event);
     this.dismiss();
   }
 
   deleteEvent(){
-    this.chatProvider.deleteEvent(this.semester, this.crn, this.event.key);
+    this.chatProvider.deleteEvent(this.semester, this.year, this.crn, this.event.key);
     this.dismiss();
   }
 

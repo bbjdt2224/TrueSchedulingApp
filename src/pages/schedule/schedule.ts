@@ -1,12 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
 
-import { UserClasses } from '../../classes/userclasses';
-import { NewClassPage } from '../new-class/new-class';
 import { MenuController } from 'ionic-angular';
-import { ClassModalPage } from '../class-modal/class-modal';
 import { parseDate } from 'ionic-angular/util/datetime-util';
-import { GroupsPage } from '../groups/groups';
 import { UserProvider } from '../../providers/user/user';
 import { snapshotToArray } from '../../providers/user/user';
 
@@ -28,7 +24,7 @@ export class SchedulePage {
     currDate = new Date();
     currSemester: string;
     days = ['M', 'T', 'W', 'R', 'F'];
-    schedule: UserClasses[][];
+    schedule;
     classes = [];
     times: Date[];
     colors: String[][];
@@ -50,6 +46,7 @@ export class SchedulePage {
     }
 
     ionViewDidEnter() {
+        this.currSemester = this.navParams.get('semester');
         this.getClasses();
         this.menuCtrl.close();
     }
@@ -133,8 +130,8 @@ export class SchedulePage {
         return new Date(this.currDate.getFullYear(), this.currDate.getMonth(), this.currDate.getDate(), stime.hour, stime.minute, stime.second);
     }
 
-    public viewClass(c: UserClasses) {
-        let classModal = this.modalCtrl.create(ClassModalPage, {class: c, semester: this.currSemester+''+this.currDate.getFullYear()});
+    public viewClass(c) {
+        let classModal = this.modalCtrl.create('ClassModalPage', {class: c, semester: this.currSemester, year: this.currDate.getFullYear()});
         classModal.present();
     }
 
@@ -144,7 +141,7 @@ export class SchedulePage {
     }
 
     public newClass() {
-        this.navCtrl.push(NewClassPage, {semester: this.currSemester, year: this.currDate.getFullYear()});
+        this.navCtrl.push('NewClassPage', {semester: this.currSemester, year: this.currDate.getFullYear()});
     }
 
     public changeSemester(semester: string){
@@ -154,7 +151,7 @@ export class SchedulePage {
     }
 
     groupsPage(){
-        this.navCtrl.push(GroupsPage, {semester: this.currSemester, year: this.currDate.getFullYear()});
+        this.navCtrl.push('GroupsPage', {semester: this.currSemester, year: this.currDate.getFullYear()});
     }
 
 

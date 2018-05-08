@@ -1,16 +1,10 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, Slides, Content, AlertController } from 'ionic-angular';
-import { GroupRelation } from '../../classes/grouprelation';
-import { Group } from '../../classes/group';
 import { MenuController } from 'ionic-angular';
-import { SchedulePage } from '../schedule/schedule';
 import { ViewChild } from '@angular/core';
-import { NewEventPage } from '../new-event/new-event';
 import { UserProvider } from '../../providers/user/user';
 import { ChatProvider } from '../../providers/chat/chat';
-import { Events } from '../../classes/events';
 import { ModalController } from 'ionic-angular';
-import { EditEventPage } from '../edit-event/edit-event';
 import * as firebase from 'firebase';
 
 /**
@@ -29,16 +23,16 @@ export class GroupHomePage {
     @ViewChild(Slides) slides: Slides;
     @ViewChild(Content) content: Content;
 
-    groupRelation = new GroupRelation();
     group;
     crn;
     semester = '';
+    year;
     page = 0;
     events = [];
-    selectedEvent: Events[] = new Array();
+    selectedEvent = new Array();
     isSelected = false;
     viewDate = new Date();
-    viewEvents: Events[][] = new Array();
+    viewEvents = new Array();
 
     chats = [];
     name = '';
@@ -65,8 +59,6 @@ export class GroupHomePage {
         private chatProvider: ChatProvider,
         private alertCtrl: AlertController
     ) {
-        this.groupRelation.group = new Group();
-
         this.message = '';
         this.uid = this.userProvider.getUser();
         this.userProvider.getName().on('value', resp => {
@@ -74,7 +66,8 @@ export class GroupHomePage {
         })
         this.crn = this.navParams.get('group');
         this.semester = this.navParams.get('semester');
-        this.userProvider.getClass(this.crn, this.semester).on('value', resp => {
+        this.year = this.navParams.get('year')
+        this.userProvider.getClass(this.crn, this.semester, this.year).on('value', resp => {
             this.group = resp.val();
         })
 
@@ -105,7 +98,7 @@ export class GroupHomePage {
     }
 
     getChats(){
-        firebase.database().ref('classes/'+this.semester+'/'+this.crn+'/messages').on('value', resp => {
+        firebase.database().ref('classes/'+this.year+'/'+this.semester+'/'+this.crn+'/messages').on('value', resp => {
             this.chats = [];
             this.chats = snapshotToArray(resp);
             // setTimeout(() => {
@@ -117,17 +110,17 @@ export class GroupHomePage {
     }
 
     sendMessage() {
-        this.chatProvider.sendMessage(this.message, this.uid, this.name, this.crn, this.semester);
+        this.chatProvider.sendMessage(this.message, this.uid, this.name, this.crn, this.semester, this.year);
         this.message = '';
       }
       
 
     goback() {
-        this.navCtrl.setRoot(SchedulePage, { semester: this.semester });
+        this.navCtrl.setRoot('SchedulePage', { semester: this.semester });
     }
 
     getEvents() {
-        this.chatProvider.getEvents(this.semester, this.crn).on('value', resp => {
+        this.chatProvider.getEvents(this.semester, this.year, this.crn).on('value', resp => {
             this.events = snapshotToArray(resp);
             this.getDaysOfMonth();
             this.getTodayEvents();
@@ -159,7 +152,7 @@ export class GroupHomePage {
     }
 
     newEventPage() {
-        let newEvent = this.modalCtrl.create(NewEventPage, { crn: this.crn, semester: this.semester});
+        let newEvent = this.modalCtrl.create('NewEventPage', { crn: this.crn, semester: this.semester, year: this.year});
         newEvent.present();
     }
 
@@ -173,7 +166,7 @@ export class GroupHomePage {
                     {
                       text: 'Edit',
                       handler: () => {
-                        let editEvent = this.modalCtrl.create(EditEventPage, {event: event, crn: this.crn, semester: this.semester});
+                        let editEvent = this.modalCtrl.create('EditEventPage', {event: event, crn: this.crn, semester: this.semester, year: this.year});
                         editEvent.present();
                       }
                     },
@@ -299,7 +292,7 @@ export class GroupHomePage {
     }
 
     dismiss(){
-        this.navCtrl.setRoot(SchedulePage, {semester: this.semester.substring(0, this.semester.length-4)});
+        this.navCtrl.setRoot('SchedulePage', {semester: this.semester});
     }
 
 }
