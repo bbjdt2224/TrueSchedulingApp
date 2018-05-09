@@ -33,6 +33,11 @@ export class GroupHomePage {
     viewEvents = new Array();
     dayClasses = new Array();
 
+    users;
+    schedule;
+    times;
+    greatestAvail = 0;
+
     chats = [];
     name = '';
     uid = '';
@@ -75,6 +80,64 @@ export class GroupHomePage {
         console.log('ionViewDidLoad GroupHomePage');
         this.getEvents();
         this.getChats();
+        this.getClasses();
+    }
+
+    timetoNumebr(time){
+        let stime = time.split(':');
+        let ntime = parseInt(stime[0]);
+        return ntime;
+    }
+
+    getClasses(){
+        this.userProvider.getAllUsers().on('value', resp => {
+            this.users = snapshotToArray(resp);
+            let schedule = new Array();
+            let days = ['M', 'T', 'W', 'R', 'F'];
+            for(var i = 0; i < 5; i ++){
+                schedule[i] = new Array();
+                for(var j = 0; j < 15; j ++){
+                    schedule[i][j] = 0;
+                }
+            }
+            this.users.forEach(item => {
+                let userClasses = item.classes[this.year][this.semester];
+                if(userClasses && userClasses[this.group.crn]){
+                    let keys = Object.keys(userClasses);
+                    for(let i = 0; i < 5; i ++){
+                        for(let j = 0; j < 15; j ++){
+                            let isClass = false;
+                            keys.forEach(element => {
+                                const day = userClasses[element].days.split('');
+                                const time = userClasses[element].time.split(' ');
+                                let istart = time[0];
+                                let iend = time [2];
+                                if(this.timetoNumebr(istart) <= j+8 && this.timetoNumebr(iend) >= j+8 && (days.indexOf(day[0]) == i || (day[1] && days.indexOf(day[1]) == i) || (day[2] && days.indexOf(day[2]) == i ) || (day[3] && days.indexOf(day[3]) == i))){
+                                    isClass = true
+                                }
+                            });
+                            if(!isClass){
+                                schedule[i][j] ++;
+                                if(schedule[i][j] > this.greatestAvail){
+                                    this.greatestAvail = schedule[i][j];
+                                }
+                            }
+                        }
+                    }
+                    
+                }
+            });
+            this.generateTimes(8, 22);
+            this.schedule = schedule;
+        });
+            
+    }
+
+    generateTimes(start: number, finish: number){
+        this.times = [];
+        for(var i = start; i <= finish; i ++){
+            this.times.push(new Date(this.date.getFullYear(), this.date.getMonth(), this.date.getDay(), Math.floor(i),0,0));
+        }
     }
 
     eventList(days){
@@ -248,6 +311,11 @@ export class GroupHomePage {
             }
         });
         this.viewDate = thisDate1;
+    }
+
+    formatDate(date:Date): string {
+        let timestring = date.toLocaleTimeString().split(':');
+        return timestring[0]+':'+timestring[1];
     }
 
     formatDatetime(datetime){

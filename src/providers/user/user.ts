@@ -44,6 +44,10 @@ export class UserProvider {
         });
     }
 
+    getAllUsers() {
+        return firebase.database().ref('users');
+    }
+
     getClasses(semester: string, year: number) {
         return firebase.database().ref('users/'+this.uid+'/classes/'+year+'/'+semester);
     }

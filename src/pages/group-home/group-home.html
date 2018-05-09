@@ -108,5 +108,29 @@
                 </ion-item>
             </ion-list>
         </ion-slide>
+        <ion-slide id='small'>
+            <ion-row>
+                <ion-col col-2></ion-col>
+                <ion-col class="center" col-2>Mon</ion-col>
+                <ion-col class="center" col-2>Tue</ion-col>
+                <ion-col class="center" col-2>Wed</ion-col>
+                <ion-col class="center" col-2>Thur</ion-col>
+                <ion-col class="center" col-2>Fri</ion-col>
+            </ion-row>
+            <ion-row id="time" *ngFor="let s of times; let i = index" class="row">
+                <ion-col col-2>
+                    {{formatDate(s)}}
+                </ion-col>
+                <ion-col col-2 *ngFor="let day of schedule; let j = index" class="col center">
+                    <span *ngIf="schedule[j] && schedule[j][i]" >
+                        <span *ngIf="schedule[j][i] == greatestAvail; else not" style="color:red">{{schedule[j][i]}}</span>
+                        <ng-template #not>
+                            {{schedule[j][i]}}
+                        </ng-template>
+                    </span>
+                    <br>
+                </ion-col>
+            </ion-row>
+        </ion-slide>
     </ion-slides>
 </ion-content>
