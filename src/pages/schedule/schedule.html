@@ -8,14 +8,14 @@
 <ion-menu id="semester" [content]="menu" type="overlay">
     <ion-content>
         <ion-list>
-            <ion-item (click)="newClass()"><ion-icon name="add"></ion-icon> New Class</ion-item>
-            <ion-item (click)="changeSemester('Spring')">Spring</ion-item>
-            <ion-item (click)="changeSemester('Summer I')">Summer I</ion-item>
-            <ion-item (click)="changeSemester('Summer II')">Summer II</ion-item>
-            <ion-item (click)="changeSemester('Fall')">Fall</ion-item>
+            <ion-item (click)="newClass()" icon-left id="brown"><ion-icon name="add" class="gold"></ion-icon> New Class</ion-item>
+            <ion-item (click)="changeSemester('Spring')" id="{{semesterClass[0]}}">Spring</ion-item>
+            <ion-item (click)="changeSemester('Summer I')" id="{{semesterClass[1]}}">Summer I</ion-item>
+            <ion-item (click)="changeSemester('Summer II')" id="{{semesterClass[2]}}">Summer II</ion-item>
+            <ion-item (click)="changeSemester('Fall')" id="{{semesterClass[3]}}">Fall</ion-item>
             <ion-item id="sign-out" (click)="signout()">
                 <div class="inner-text">
-                    <ion-icon name="log-out"></ion-icon>
+                    <ion-icon name="log-out" class="gold"></ion-icon>
                     Sign Out
                 </div>
             </ion-item>
@@ -27,12 +27,12 @@
 
     <ion-navbar>
         <button ion-button menuToggle>
-            <ion-icon name="menu"></ion-icon>
+            <ion-icon name="menu" class="gold"></ion-icon>
         </button>
         <ion-title>Schedule</ion-title>
         <ion-buttons end>
             <button ion-button (click)="groupsPage()">
-                <ion-icon name="people" item-start color="default"></ion-icon>
+                <ion-icon name="people" item-start color="default" class="gold"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>

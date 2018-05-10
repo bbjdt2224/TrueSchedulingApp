@@ -9,14 +9,14 @@
 
     <ion-navbar>
         <ion-buttons start>
-            <button ion-button (click)="dismiss()">Back</button>
+            <button ion-button (click)="dismiss()" class="gold">Back</button>
         </ion-buttons>
         <ion-title>
             {{group.title}}
         </ion-title>
         <ion-buttons end *ngIf="getPage() == 1">
             <button ion-button icon-only (click)="newEventPage()">
-                <ion-icon color="primary" name="add-circle"></ion-icon>
+                <ion-icon color="primary" name="add-circle" class="gold"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>

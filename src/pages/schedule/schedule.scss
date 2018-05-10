@@ -30,5 +30,24 @@ page-schedule {
         left: 0;
         right: 0;
         border-top: 1px solid rgba(153,171,188,0.5);
+        background-color: $brown;
+        color: white;
+    }
+
+    .item-ios, .item-md{
+        padding-left: 5px;
+    }
+
+    #currentSemester{
+        border-left: solid $gold 16px;
+        color: $gold;
+    }
+    #otherSemester{
+        border-left: solid $brown 16px;
+        color: gray;
+    }
+    #brown{
+        background-color: $brown;
+        color: white;
     }
 }

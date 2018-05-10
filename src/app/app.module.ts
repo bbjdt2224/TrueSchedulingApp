@@ -30,7 +30,7 @@ import { ChatProvider } from '../providers/chat/chat';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     UserProvider,
-    ChatProvider
+    ChatProvider,
   ]
 })
 export class AppModule {}

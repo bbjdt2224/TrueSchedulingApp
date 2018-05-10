@@ -30,6 +30,7 @@ export class SchedulePage {
     times: Date[];
     colors: String[][];
     colorClasses = ['class1','class2','class3','class4','class5']
+    semesterClass = ['currentSemester', 'otherSemester', 'otherSemester', 'otherSemester'];
 
     constructor(
         public navCtrl: NavController, 
@@ -43,11 +44,13 @@ export class SchedulePage {
     ionViewDidLoad() {
         console.log('ionViewDidLoad SchedulePage');
         this.currSemester = this.navParams.get('semester');
+        this.changeSemesterColors(this.currSemester);
         this.getClasses();
     }
 
     ionViewDidEnter() {
         this.currSemester = this.navParams.get('semester');
+        this.changeSemesterColors(this.currSemester);
         this.getClasses();
         this.menuCtrl.close();
     }
@@ -147,6 +150,7 @@ export class SchedulePage {
 
     public changeSemester(semester: string){
         this.currSemester = semester;
+        this.changeSemesterColors(this.currSemester);
         this.getClasses();
         this.menuCtrl.close();
     }
@@ -157,6 +161,21 @@ export class SchedulePage {
 
     signout(){
         this.navCtrl.setRoot(LoginPage);
+    }
+
+    changeSemesterColors(semester){
+        if(semester == 'Spring'){
+            this.semesterClass = ['currentSemester', 'otherSemester', 'otherSemester', 'otherSemester'];
+        }
+        else if(semester == 'Summer I'){
+            this.semesterClass = ['otherSemester', 'currentSemester', 'otherSemester', 'otherSemester'];
+        }
+        else if(semester == 'Summer II'){
+            this.semesterClass = ['otherSemester', 'otherSemester', 'currentSemester', 'otherSemester'];
+        }
+        else if(semester == 'Fall'){
+            this.semesterClass = ['otherSemester', 'otherSemester', 'otherSemester', 'currentSemester'];
+        }
     }
 
 

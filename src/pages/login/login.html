@@ -14,6 +14,9 @@
 
 
 <ion-content padding>
+    <div id="logo">
+        <h1 style="font-size: 72pt">TS</h1>
+    </div>
     <ion-list>
         <ion-item>
             <ion-label floating>Email</ion-label>
@@ -24,7 +27,10 @@
             <ion-input type="password" [(ngModel)]="password"></ion-input>
         </ion-item>
     </ion-list>
-    <button ion-button (click)="login()">Login</button>
-    <button ion-button clear (click)="signup()">Sign-Up</button>
+    <div id="buttons">
+        <button ion-button (click)="login()" type="submit" class="background-gold">Login</button>
+        <br>
+        <button ion-button clear (click)="signup()" class="gold">Sign-Up</button>
+    </div>
     <p style="color: red;">{{errormsg}}</p>
 </ion-content>
