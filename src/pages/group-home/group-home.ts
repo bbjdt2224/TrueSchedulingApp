@@ -12,7 +12,9 @@ import { ModalController } from 'ionic-angular';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+    segment: 'page-group-home/:group/:semester/:year'
+})
 @Component({
     selector: 'page-group-home',
     templateUrl: 'group-home.html',
@@ -93,8 +95,8 @@ export class GroupHomePage {
         this.userProvider.getAllUsers().on('value', resp => {
             this.users = snapshotToArray(resp);
             let schedule = new Array();
-            let days = ['M', 'T', 'W', 'R', 'F'];
-            for(var i = 0; i < 5; i ++){
+            let days = ['S','M', 'T', 'W', 'R', 'F','A'];
+            for(var i = 0; i < 7; i ++){
                 schedule[i] = new Array();
                 for(var j = 0; j < 15; j ++){
                     schedule[i][j] = 0;
@@ -104,7 +106,7 @@ export class GroupHomePage {
                 let userClasses = item.classes[this.year][this.semester];
                 if(userClasses && userClasses[this.group.crn]){
                     let keys = Object.keys(userClasses);
-                    for(let i = 0; i < 5; i ++){
+                    for(let i = 0; i < 7; i ++){
                         for(let j = 0; j < 15; j ++){
                             let isClass = false;
                             keys.forEach(element => {
@@ -201,7 +203,8 @@ export class GroupHomePage {
         }
     }
 
-    newEventPage() {
+    newEventPage(day?) {
+        console.log(day);
         let newEvent = this.modalCtrl.create('NewEventPage', { crn: this.crn, semester: this.semester, year: this.year});
         newEvent.present();
     }
