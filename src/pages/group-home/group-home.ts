@@ -56,6 +56,8 @@ export class GroupHomePage {
     currentYear: any;
     currentDate: any;
 
+    currentTab = '0';
+
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
@@ -179,10 +181,6 @@ export class GroupHomePage {
         })
     }
 
-    getPage(){
-        return this.slides.getActiveIndex()
-    }
-
 
     swipe(e) {
         if (e.direction == 2) {
@@ -204,8 +202,7 @@ export class GroupHomePage {
     }
 
     newEventPage(day?) {
-        console.log(day);
-        let newEvent = this.modalCtrl.create('NewEventPage', { crn: this.crn, semester: this.semester, year: this.year});
+        let newEvent = this.modalCtrl.create('NewEventPage', { crn: this.crn, semester: this.semester, year: this.year, day});
         newEvent.present();
     }
 

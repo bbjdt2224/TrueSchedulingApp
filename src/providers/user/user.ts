@@ -12,12 +12,13 @@ import * as firebase from 'firebase/app';
 @Injectable()
 export class UserProvider {
 
-    uid = '';
+    uid = 'FK9poeSFPmc6G2TjK1hAQ0KfAu82';
 
     constructor() { }
 
     setUser(uid) {
         this.uid = uid
+        console.log(uid);
     }
 
     getUser() {

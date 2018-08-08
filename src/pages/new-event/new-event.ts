@@ -21,11 +21,13 @@ export class NewEventPage {
         title: '',
         description: '',
         location: '',
-        datetime: new Date
+        datetime: new Date()
     };
     semester;
     year;
     crn;
+    day = [0];
+    today = new Date();
     error = '';
 
     constructor(
@@ -37,6 +39,7 @@ export class NewEventPage {
         this.semester = this.navParams.get('semester');
         this.year = this.navParams.get('year');
         this.crn = this.navParams.get('crn');
+        this.day = [this.navParams.get('day')];
         this.event.description = '';
     }
 

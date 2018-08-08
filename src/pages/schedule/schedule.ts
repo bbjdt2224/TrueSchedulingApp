@@ -15,7 +15,9 @@ import { LoginPage } from '../login/login';
  * Ionic pages and navigation.
  */
 
-@IonicPage()
+@IonicPage({
+    segment: 'page-schedule/:semester'
+})
 @Component({
     selector: 'page-schedule',
     templateUrl: 'schedule.html',
