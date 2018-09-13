@@ -7,9 +7,6 @@
 <ion-header>
 
     <ion-navbar>
-        <ion-buttons start>
-            <button ion-button (click)="goBack()">Close</button>
-        </ion-buttons>
         <ion-title>New Class</ion-title>
     </ion-navbar>
 
@@ -17,7 +14,7 @@
 
 
 <ion-content padding>
-    <ion-list>
+    <!-- <ion-list>
         <ion-item>
             <ion-label>Semester</ion-label>
             <ion-select [(ngModel)]="semester">
@@ -56,5 +53,30 @@
             <ion-input type="number" [(ngModel)]="crn[4]"></ion-input>
         </ion-item>
     </ion-list>
-    <button ion-button (click)="addClass()">Add</button>
+    <button ion-button (click)="addClass()">Add</button> -->
+
+    <ion-list>
+
+        <ion-item>
+            <ion-label>Search</ion-label>
+            <ion-input type="text" [(ngModel)]="searchKey" (input)="searchClass(searchKey)"></ion-input>
+        </ion-item>
+
+    </ion-list>
+
+
+    <div class="class-list" *ngFor="let class of classList">
+        <ion-card class="course">
+            <div class="course-information">
+                <span [innerText]="class.title"></span>
+                <span [innerText]="class.days"></span>
+                <span [innerText]="formatTime(class.time)"></span>
+            </div>
+            <div class="add-button">
+                <button ion-button [disabled]="hasClass(class.crn)">
+                    <ion-icon name="add" (click)="addClass(class.crn, class.title)"></ion-icon>
+                </button>
+            </div>
+        </ion-card>
+    </div>
 </ion-content>

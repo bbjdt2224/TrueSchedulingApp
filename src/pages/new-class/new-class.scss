@@ -1,3 +1,11 @@
 page-new-class {
-
+    .course{
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        .course-information{
+            display: flex;
+            flex-direction: column;
+        }
+    }
 }

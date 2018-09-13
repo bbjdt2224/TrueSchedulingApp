@@ -1,14 +1,8 @@
-<!--
-  Generated template for the SchedulePage page.
-
-  See http://ionicframework.com/docs/components/#navigation for more info on
-  Ionic pages and navigation.
--->
-
 <ion-menu id="semester" [content]="menu" type="overlay">
     <ion-content>
+        <div class="header">
+        </div>
         <ion-list>
-            <ion-item (click)="newClass()" icon-left id="brown"><ion-icon name="add" class="gold"></ion-icon> New Class</ion-item>
             <ion-item (click)="changeSemester('Spring')" id="{{semesterClass[0]}}">Spring</ion-item>
             <ion-item (click)="changeSemester('Summer I')" id="{{semesterClass[1]}}">Summer I</ion-item>
             <ion-item (click)="changeSemester('Summer II')" id="{{semesterClass[2]}}">Summer II</ion-item>
@@ -31,16 +25,23 @@
         </button>
         <ion-title>Schedule</ion-title>
         <ion-buttons end>
-            <button ion-button (click)="groupsPage()">
-                <ion-icon name="people" item-start color="default" class="gold"></ion-icon>
+            <button (click)="newClass()" icon-left id="brown">
+                <ion-icon name="add" class="gold"></ion-icon>
             </button>
         </ion-buttons>
     </ion-navbar>
 
 </ion-header>
 
-
 <ion-content padding>
+    <ion-segment [(ngModel)]="currentTab" (ionChange)="swapSchedule()">
+        <ion-segment-button value="0">
+            Regular
+        </ion-segment-button>
+        <ion-segment-button value = "1">
+            Finals
+        </ion-segment-button>
+    </ion-segment>
     <h2>{{currSemester}} {{currDate.getFullYear()}}</h2>
     <ion-list>
         <ion-row>
@@ -57,7 +58,7 @@
             </ion-col>
             <ion-col col-2 *ngFor="let day of schedule; let j = index" class="col {{colors[j][i]}} center">
                 <span *ngIf="schedule[j] && schedule[j][i]">
-                    <ion-icon name="search" (click)="viewClass(schedule[j][i])"></ion-icon>
+                    <ion-icon name="help" (click)="viewClass(schedule[j][i])"></ion-icon>
                 </span>
                 <br>
             </ion-col>

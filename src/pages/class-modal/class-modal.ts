@@ -84,4 +84,8 @@ export class ClassModalPage {
         }
     }
 
+    groupHome(crn) {
+        this.navCtrl.setRoot('GroupHomePage', { group: crn, semester: this.semester, year: this.year})
+    }
+
 }

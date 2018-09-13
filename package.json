@@ -45,7 +45,7 @@
     "cordova-plugin-calendar": "^5.0.0"
   },
   "devDependencies": {
-    "@ionic/app-scripts": "^3.1.9",
+    "@ionic/app-scripts": "^3.2.0",
     "typescript": "^2.8.3"
   },
   "description": "An Ionic project",

@@ -18,7 +18,6 @@ export class UserProvider {
 
     setUser(uid) {
         this.uid = uid
-        console.log(uid);
     }
 
     getUser() {
@@ -68,6 +67,14 @@ export class UserProvider {
     
     getClass(crn, semester, year) {
         return firebase.database().ref('users/'+this.uid+'/classes/'+year+'/'+semester+'/'+crn);
+    }
+
+    findClass(semester, year) {
+        return firebase.database().ref('classes/'+year+'/'+semester);
+    }
+
+    getFinals(semester, year){
+        return firebase.database().ref('finals/'+year+'/'+semester);
     }
 
 }
