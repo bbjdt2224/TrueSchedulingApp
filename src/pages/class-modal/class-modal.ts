@@ -1,13 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController, AlertController } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
-
-/**
- * Generated class for the ClassModalPage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
+import { locations } from '../../models/locations';
 
 @IonicPage()
 @Component({
@@ -27,6 +21,7 @@ export class ClassModalPage {
     end = '';
     semester = '';
     year;
+    coords;
 
     constructor(
         public navCtrl: NavController,
@@ -45,6 +40,7 @@ export class ClassModalPage {
         this.end = this.formatTime(time[2]);
         this.semester = this.navParams.get('semester');
         this.year = this.navParams.get('year');
+        this.findLocation();
     }
 
     dismiss() {
@@ -86,6 +82,19 @@ export class ClassModalPage {
 
     groupHome(crn) {
         this.navCtrl.setRoot('GroupHomePage', { group: crn, semester: this.semester, year: this.year})
+    }
+
+    findLocation(){
+        const location = locations.find(l => {
+            return l.building === this.c.building; 
+        });
+        if(location){
+            this.coords = location.long + ', ' + location.lat;
+        }
+    }
+
+    openMap(){
+        window.open('maps://?q=' + this.coords, '_system');
     }
 
 }
