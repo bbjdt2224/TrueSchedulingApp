@@ -9,16 +9,17 @@ import { MyApp } from './app.component';
 import { LoginPage } from '../pages/login/login';
 import { UserProvider } from '../providers/user/user';
 import { ChatProvider } from '../providers/chat/chat';
+import { LoginPageModule } from '../pages/login/login.module';
 
 @NgModule({
   declarations: [
-    MyApp,
-    LoginPage
+    MyApp
   ],
   imports: [
     BrowserModule,
     IonicModule.forRoot(MyApp),
-    HttpClientModule
+    HttpClientModule,
+    LoginPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
