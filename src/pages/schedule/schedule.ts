@@ -8,12 +8,6 @@ import { snapshotToArray } from '../../providers/user/user';
 import { LoginPage } from '../login/login';
 
 
-/**
- * Generated class for the SchedulePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage({
     segment: 'page-schedule/:semester'

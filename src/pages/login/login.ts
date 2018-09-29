@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { UserProvider } from '../../providers/user/user';
+import { Storage } from '@ionic/storage';
 
 /**
  * Generated class for the LoginPage page.
@@ -24,8 +25,14 @@ export class LoginPage {
     constructor(
         public navCtrl: NavController,
         public navParams: NavParams,
-        private userProvider: UserProvider
+        private userProvider: UserProvider,
+        private storage: Storage
     ) {
+        this.storage.get('email').then(email => this.email = email);
+        this.storage.get(this.password).then(pass => this.password = pass);
+        if(this.email.length > 1  && this.password.length > 1){
+            this.login();
+        }
     }
 
     ionViewDidLoad() {
@@ -34,7 +41,11 @@ export class LoginPage {
 
     login(){
         this.userProvider.login(this.email, this.password).then(
-            success => {this.userProvider.setUser(success.uid); this.navCtrl.setRoot('SchedulePage', {semester: this.findSemester()})},
+            success => {this.userProvider.setUser(success.uid);
+                this.storage.set('email', this.email);
+                this.storage.set('password', this.password);
+                this.navCtrl.setRoot('SchedulePage', {semester: this.findSemester()})
+            },
             error => this.errormsg = error
         );
         
