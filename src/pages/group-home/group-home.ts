@@ -5,13 +5,6 @@ import { UserProvider } from '../../providers/user/user';
 import { ChatProvider } from '../../providers/chat/chat';
 import { ModalController } from 'ionic-angular';
 
-/**
- * Generated class for the GroupHomePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
-
 @IonicPage({
     segment: 'page-group-home/:group/:semester/:year'
 })

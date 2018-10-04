@@ -81,7 +81,7 @@ export class ClassModalPage {
     }
 
     groupHome(crn) {
-        this.navCtrl.setRoot('GroupHomePage', { group: crn, semester: this.semester, year: this.year})
+        this.navCtrl.push('GroupHomePage', { group: crn, semester: this.semester, year: this.year})
     }
 
     findLocation(){
