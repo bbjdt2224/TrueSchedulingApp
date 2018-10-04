@@ -29,7 +29,7 @@ export class LoginPage {
         private storage: Storage
     ) {
         this.storage.get('email').then(email => this.email = email);
-        this.storage.get(this.password).then(pass => this.password = pass);
+        this.storage.get('password').then(pass => this.password = pass);
         if(this.email.length > 1  && this.password.length > 1){
             this.login();
         }
