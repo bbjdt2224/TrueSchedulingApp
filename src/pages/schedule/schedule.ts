@@ -56,7 +56,6 @@ export class SchedulePage {
     }
 
     ionViewDidEnter() {
-        this.currSemester = this.navParams.get('semester');
         this.changeSemesterColors(this.currSemester);
         this.getClasses();
         this.menuCtrl.close();

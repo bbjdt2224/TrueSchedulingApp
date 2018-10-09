@@ -30,7 +30,7 @@ export class NewClassPage {
     ) {
         this.semester = this.navParams.get('semester');
         this.year = this.navParams.get('year');
-        this.getAllClasses(this.semester, this.year);
+        this.getAllClasses();
         this.getStudentClasses();
     }
 
@@ -53,8 +53,8 @@ export class NewClassPage {
         });
     }
 
-    getAllClasses(semester, year) {
-        this.userProvider.findClass(semester, year).on('value', resp => {
+    getAllClasses() {
+        this.userProvider.findClass(this.semester, this.year).on('value', resp => {
             this.allClasses = snapshotToArray(resp);
         });
     }

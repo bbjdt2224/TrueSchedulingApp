@@ -5,6 +5,13 @@ import { UserProvider } from '../../providers/user/user';
 import { ChatProvider } from '../../providers/chat/chat';
 import { ModalController } from 'ionic-angular';
 
+/**
+ * Generated class for the GroupHomePage page.
+ *
+ * See https://ionicframework.com/docs/components/#navigation for more info on
+ * Ionic pages and navigation.
+ */
+
 @IonicPage({
     segment: 'page-group-home/:group/:semester/:year'
 })
@@ -98,30 +105,32 @@ export class GroupHomePage {
                 }
             }
             this.users.forEach(item => {
-                let userClasses = item.classes[this.year][this.semester];
-                if(userClasses && userClasses[this.group.crn]){
-                    let keys = Object.keys(userClasses);
-                    for(let i = 0; i < 7; i ++){
-                        for(let j = 0; j < 15; j ++){
-                            let isClass = false;
-                            keys.forEach(element => {
-                                const day = userClasses[element].days.split('');
-                                const time = userClasses[element].time.split(' ');
-                                let istart = time[0];
-                                let iend = time [2];
-                                if(this.timetoNumebr(istart) <= j+8 && this.timetoNumebr(iend) >= j+8 && (days.indexOf(day[0]) == i || (day[1] && days.indexOf(day[1]) == i) || (day[2] && days.indexOf(day[2]) == i ) || (day[3] && days.indexOf(day[3]) == i))){
-                                    isClass = true
-                                }
-                            });
-                            if(!isClass){
-                                schedule[i][j] ++;
-                                if(schedule[i][j] > this.greatestAvail){
-                                    this.greatestAvail = schedule[i][j];
+                if(item.classes && item.classes[this.year] && item.classes[this.year][this.semester]){
+                    let userClasses = item.classes[this.year][this.semester];
+                    if(userClasses && userClasses[this.group.crn]){
+                        let keys = Object.keys(userClasses);
+                        for(let i = 0; i < 7; i ++){
+                            for(let j = 0; j < 15; j ++){
+                                let isClass = false;
+                                keys.forEach(element => {
+                                    const day = userClasses[element].days.split('');
+                                    const time = userClasses[element].time.split(' ');
+                                    let istart = time[0];
+                                    let iend = time [2];
+                                    if(this.timetoNumebr(istart) <= j+8 && this.timetoNumebr(iend) >= j+8 && (days.indexOf(day[0]) == i || (day[1] && days.indexOf(day[1]) == i) || (day[2] && days.indexOf(day[2]) == i ) || (day[3] && days.indexOf(day[3]) == i))){
+                                        isClass = true
+                                    }
+                                });
+                                if(!isClass){
+                                    schedule[i][j] ++;
+                                    if(schedule[i][j] > this.greatestAvail){
+                                        this.greatestAvail = schedule[i][j];
+                                    }
                                 }
                             }
                         }
+                        
                     }
-                    
                 }
             });
             this.generateTimes(8, 22);
