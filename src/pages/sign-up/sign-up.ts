@@ -37,9 +37,9 @@ export class SignUpPage {
         if (this.password === this.cpassword) {
             this.userProvider.signup(this.email, this.password).then( success => {
                 this.userProvider.addUser(this.name, success.uid);
-                this.navCtrl.setRoot('SchedulePage');
+                this.navCtrl.setRoot('LoginPage');
             },
-        error=> this.error = error);
+        error=> this.error = error.message);
         }
         else{
             this.error = 'The password and confirmation password do not match';

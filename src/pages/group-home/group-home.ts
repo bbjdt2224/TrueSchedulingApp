@@ -81,7 +81,6 @@ export class GroupHomePage {
     }
 
     ionViewDidLoad() {
-        console.log('ionViewDidLoad GroupHomePage');
         this.getEvents();
         this.getChats();
         this.getClasses();
